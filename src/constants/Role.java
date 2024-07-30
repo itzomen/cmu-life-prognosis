@@ -1,0 +1,4 @@
+enum Role{
+    PATIENT,
+    ADMIN
+}

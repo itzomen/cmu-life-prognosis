@@ -1,0 +1,5 @@
+
+
+class PatientView extends UserView{
+    
+}
