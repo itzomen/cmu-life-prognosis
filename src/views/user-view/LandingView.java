@@ -1,5 +1,0 @@
-
-
-class LoginView extends UserView{
-    
-}

@@ -1,12 +1,10 @@
-
+import dataprovider.userprovider.AuthenticationProvider;
+import usercontroller.AuthenticationController;
+import views.LandingView;
 
 class HelathPrognosisApplication{
     public static void main(String[] args)
-{
-boolean loggedIn=false; 
-// print it 
-    
-}
-
-
+   {
+        new LandingView(new AuthenticationController(new AuthenticationProvider())).start();
+    }
 }

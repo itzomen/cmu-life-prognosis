@@ -1,5 +1,5 @@
 
-
-class Admin extends User{
+package models.user;
+public class Admin extends User{
     
 }
