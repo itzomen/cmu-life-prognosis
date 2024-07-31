@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Register user script
-# Usage: ./register_user.sh uuid password first_name last_name dob hiv diagnosis_date art art_date
+# Usage: ./register_user.sh uuid password first_name last_name dob iso hiv diagnosis_date art art_date
 
 UUID=$1
 PASSWORD=$2
@@ -9,19 +9,20 @@ HASHED_PASSWORD=$(echo -n "$PASSWORD" | sha256sum | awk '{print $1}')
 FIRST_NAME=$3
 LAST_NAME=$4
 DOB=$5
-HIV=$6
-DIAGNOSIS_DATE=$7
-ART=$8
-ART_DATE=$9
+ISO=$6
+HIV=$7
+DIAGNOSIS_DATE=$8
+ART=$9
+ART_DATE=$10
 
 UUID_FOUND=false
 
-while IFS=: read -r uuid email role stored_password fn ln dob hiv diagnosis_date art art_date; do
+while IFS=: read -r uuid email role stored_password fn ln dob iso hiv diagnosis_date art art_date; do
   if [ "$uuid" == "$UUID" ]; then
     UUID_FOUND=true
-    NEW_LINE="$UUID:$email:$role:$HASHED_PASSWORD:$FIRST_NAME:$LAST_NAME:$DOB:$HIV:$DIAGNOSIS_DATE:$ART:$ART_DATE"
+    NEW_LINE="$UUID:$email:$role:$HASHED_PASSWORD:$FIRST_NAME:$LAST_NAME:$DOB:$ISO:$HIV:$DIAGNOSIS_DATE:$ART:$ART_DATE"
   else
-    NEW_LINE="$uuid:$email:$role:$stored_password:$fn:$ln:$dob:$hiv:$diagnosis_date:$art:$art_date"
+    NEW_LINE="$uuid:$email:$role:$stored_password:$fn:$ln:$dob:$iso:$hiv:$diagnosis_date:$art:$art_date"
   fi
   echo "$NEW_LINE" >> user-store-temp.txt
 done < user-store.txt
