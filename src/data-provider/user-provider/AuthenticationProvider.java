@@ -5,18 +5,17 @@ import java.io.IOException;
 
 class AuthenticationProvider{
     
-    public String createUser(String email, String password){
-        String uuid = UUID.randomUUID().toString();
-        String user = uuid + "," + email + "," + password;
-        try {
-            FileWriter fileWriter = new FileWriter("user.txt", true);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-            printWriter.println(user);
-            printWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return uuid;
+    public String createUser(String email, String password, Role role){
+        // append the user details to the file user.txt as follows:
+        // uuid:email:password:role
+        // We use bash to append the user details to the file user.txt
+    }
+
+    
+
+    public boolean authenticateUser(String email, String password){
+        // read the file user.txt and check if the user exists
+        // We use bash to read the file user.txt
     }
 }
 
