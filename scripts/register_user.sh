@@ -14,14 +14,24 @@ DIAGNOSIS_DATE=$7
 ART=$8
 ART_DATE=$9
 
-while IFS=: read -r uuid email role; do
+UUID_FOUND=false
+
+while IFS=: read -r uuid email role stored_password fn ln dob hiv diagnosis_date art art_date; do
   if [ "$uuid" == "$UUID" ]; then
+    UUID_FOUND=true
     NEW_LINE="$UUID:$email:$role:$HASHED_PASSWORD:$FIRST_NAME:$LAST_NAME:$DOB:$HIV:$DIAGNOSIS_DATE:$ART:$ART_DATE"
   else
-    NEW_LINE="$uuid:$email:$role"
+    NEW_LINE="$uuid:$email:$role:$stored_password:$fn:$ln:$dob:$hiv:$diagnosis_date:$art:$art_date"
   fi
   echo "$NEW_LINE" >> user-store-temp.txt
 done < user-store.txt
 
-mv user-store-temp.txt user-store.txt
-echo "User registration completed for UUID: $UUID"
+if [ "$UUID_FOUND" = false ]; then
+  rm user-store-temp.txt
+  echo "Error: UUID not found"
+  exit 1
+else
+  mv user-store-temp.txt user-store.txt
+  echo "User registration/update completed for UUID: $UUID"
+  exit 0
+fi
