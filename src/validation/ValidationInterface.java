@@ -31,7 +31,8 @@ public interface ValidationInterface {
 
 
     default boolean passwordValid(String password){
-        return password.matches("^[a-zA-Z0-9]{8}$");
+        return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$"
+        );
     }
 
     default Date dateValid(String date){

@@ -36,7 +36,7 @@ public class LandingView {
          Scanner in = new Scanner(System.in);
          String s= in.nextLine();
          ValidConcreteOperation vops= new ValidConcreteOperation();
-         ValidationOutput vout;
+             ValidationOutput vout;
 
          if(s.equals("1")){
 
@@ -48,12 +48,14 @@ public class LandingView {
                      authenticationController::uuidValid
              );
              if(!vout.isValid()) continue;
+             uuid= vout.getInput();
 
              System.out.println("Enter First Name or *");
              vout= vops.performCheck("Invalid First Name. Enter again or * to go back",
                      authenticationController::fNameValid
              );
              if(!vout.isValid()) continue;
+             fName= vout.getInput();
 
              System.out.println("Enter Last Name");
 
@@ -61,7 +63,7 @@ public class LandingView {
                      authenticationController::fNameValid
              );
              if(!vout.isValid()) continue;
-
+             lName= vout.getInput();
 
              System.out.println("Enter DOB mm/dd/yyyy");
              Date dobj=null;
@@ -106,13 +108,15 @@ public class LandingView {
                      authenticationController::isoValid
              );
              if(!vout.isValid()) continue;
+             isoCode= vout.getInput();
 
              System.out.println("Enter password ");
 
-             vout= vops.performCheck("Invalid password(length: 8, numbers, upercase and lowercase letters). Enter again or * to go back",
+             vout= vops.performCheck("Invalid password(length: 8, numbers, uppercase and lowercase letters). Enter again or * to go back",
                      authenticationController::passwordValid
              );
              if(!vout.isValid()) continue;
+             password= vout.getInput();
 
              System.out.println("Confirm password ");
              String cpass= in.nextLine();
