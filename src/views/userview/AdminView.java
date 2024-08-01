@@ -44,10 +44,20 @@ public class AdminView extends UserView {
                 }
                 System.out.println("uuid is: " + uuid);
             }else if(op.equals("2")) {
-                // logic for exporting user info
+                String fPath= adminController.exportPatientsInfo();
+                if(fPath == null) {
+                    System.out.println("Unable to export file");
+                    continue;
+                }
+                System.out.println("file exported to: "+ fPath);
             }
             else if(op.equals("3")){
-                // logic for getting analytics
+                String fPath= adminController.exportAnalytics();
+                if(fPath == null) {
+                    System.out.println("Unable to export file");
+                    continue;
+                }
+                System.out.println("file exported to: "+ fPath);
             }
             else if (op.equals("4")) {
                 break;

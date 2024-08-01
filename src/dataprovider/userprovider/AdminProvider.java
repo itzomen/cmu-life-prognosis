@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminProvider{
-   
-    
-    public List<User> getAllUsers() {
-        List<User> users= new ArrayList<User>();
-        /*
-         * 
-         * TODO: complete implementation by accessing file through bash
-         */
 
-         return users;
+
+    public String exportPatientsInfo() {
+        return "";
     }
+
+    public String exportAnalytics() {
+        return "";
+    }
+
+
 
     public String initiateRegistration(String email) {
         try {

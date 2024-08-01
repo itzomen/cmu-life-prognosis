@@ -19,4 +19,13 @@ public class AdminController implements ValidationInterface {
         }
     }
 
+
+    public String exportPatientsInfo() {
+        return adminProvider.exportPatientsInfo();
+    }
+
+    public String exportAnalytics() {
+        return adminProvider.exportAnalytics();
+    }
+
 }
