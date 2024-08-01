@@ -27,7 +27,7 @@ public class AdminView extends UserView{
                  System.out.println("error generating uuid");
                  continue;
              }
-             System.out.println("uuid is: gsdvgsvdsdhb " + uuid);
+             System.out.println("uuid is: " + uuid);
            }
            else if(op.equals("2")){ break;}
            else if(op.equals("3")){ System.exit(0); }
