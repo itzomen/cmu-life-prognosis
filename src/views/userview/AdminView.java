@@ -43,9 +43,15 @@ public class AdminView extends UserView {
                     continue;
                 }
                 System.out.println("uuid is: " + uuid);
-            } else if (op.equals("2")) {
+            }else if(op.equals("2")) {
+                // logic for exporting user info
+            }
+            else if(op.equals("3")){
+                // logic for getting analytics
+            }
+            else if (op.equals("4")) {
                 break;
-            } else if (op.equals("3")) {
+            } else if (op.equals("5")) {
                 System.exit(0);
             } else System.out.println("Invalid option");
         }
