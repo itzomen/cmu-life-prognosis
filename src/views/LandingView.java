@@ -21,9 +21,9 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class LandingView {
-  final usercontroller.AuthenticationController authenticationController;
+  final controllers.usercontroller.AuthenticationController authenticationController;
 
-    public LandingView(usercontroller.AuthenticationController authenticationController) {
+    public LandingView(controllers.usercontroller.AuthenticationController authenticationController) {
         this.authenticationController = authenticationController;
     }
 

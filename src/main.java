@@ -1,5 +1,5 @@
 import dataprovider.userprovider.AuthenticationProvider;
-import usercontroller.AuthenticationController;
+import controllers.usercontroller.AuthenticationController;
 import views.LandingView;
 
 class HelathPrognosisApplication{

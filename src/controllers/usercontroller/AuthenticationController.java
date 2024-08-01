@@ -1,5 +1,6 @@
 
-package usercontroller;
+
+package controllers.usercontroller;
 
 import dataprovider.userprovider.AuthenticationProvider;
 import models.intermediate.RegisterData;
