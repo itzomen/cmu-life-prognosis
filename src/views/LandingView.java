@@ -126,7 +126,7 @@ public class LandingView {
                  if(cpass.equals("*")) continue;
              }
              RegisterData rdata= new RegisterData(uuid, fName, lName ,dobj,
-                     hivStatus,dobj2,takingART, isoCode, password
+                     hivStatus,dobj2, dobj2, takingART, isoCode, password
              );
 
              System.out.println("registering a user....");

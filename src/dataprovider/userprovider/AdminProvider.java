@@ -20,13 +20,6 @@ public class AdminProvider{
          return users;
     }
 
-    // public String initiateRegistration(String email) {
-    //   // checking if email is unique??
-    //   //generating a uuid
-    //   // throw if any errors
-    //   return "123";
-    // }
-
     public String initiateRegistration(String email) {
         try {
             ProcessBuilder processBuilder = new ProcessBuilder("./scripts/initiate_user.sh", email);
