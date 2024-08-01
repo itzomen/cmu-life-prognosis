@@ -32,7 +32,7 @@ public class LandingView {
 
          // test with a string
          // input validation should be done...
-         System.out.println(" 1. register \n 2. login \n 3. exit \n ");
+         System.out.println(" 1. register \n 2. login \n 3. help \n 4. exit \n ");
          Scanner in = new Scanner(System.in);
          String s= in.nextLine();
          ValidConcreteOperation vops= new ValidConcreteOperation();
@@ -51,7 +51,7 @@ public class LandingView {
              uuid= vout.getInput();
 
              System.out.println("Enter First Name or *");
-             vout= vops.performCheck("Invalid First Name. Enter again or * to go back",
+             vout= vops.performCheck("Invalid Name: name shouldn't contain a number. Enter again or * to go back",
                      authenticationController::fNameValid
              );
              if(!vout.isValid()) continue;
@@ -59,7 +59,7 @@ public class LandingView {
 
              System.out.println("Enter Last Name");
 
-             vout= vops.performCheck("Invalid last Name. Enter again or * to go back",
+             vout= vops.performCheck("Invalid last Name: name shouldn't contain a number. Enter again or * to go back",
                      authenticationController::fNameValid
              );
              if(!vout.isValid()) continue;
@@ -163,6 +163,15 @@ public class LandingView {
              uview.start();
          }
          else if(s.equals("3")){
+             System.out.println("   Use the numberings to choose the options \n" +
+                     "   beware of input validations as names shouldn't contain number \n" +
+                     "   Password should be at least a length of 8, contain upper and lowercase letters \n"+
+                     "   UUID and email should be in a valid format \n" +
+                             "   Use * to go back to previous options \n" +
+                     "   Use exit options to stop the program \n"
+                     );
+         }
+         else if(s.equals("4")){
             System.exit(0);
          }
          else {
