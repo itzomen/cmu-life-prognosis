@@ -49,7 +49,7 @@ public class AdminView extends UserView {
                     System.out.println("Unable to export file");
                     continue;
                 }
-                System.out.println("file exported to: "+ fPath);
+                System.out.println("Patient data exported to: "+ fPath);
             }
             else if(op.equals("3")){
                 String fPath= adminController.exportAnalytics();
@@ -57,7 +57,7 @@ public class AdminView extends UserView {
                     System.out.println("Unable to export file");
                     continue;
                 }
-                System.out.println("file exported to: "+ fPath);
+                System.out.println("Patient data exported to: "+ fPath);
             }
             else if (op.equals("4")) {
                 break;

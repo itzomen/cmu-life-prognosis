@@ -11,7 +11,26 @@ public class AdminProvider{
 
 
     public String exportPatientsInfo() {
-        return "";
+        try {
+            ProcessBuilder processBuilder = new ProcessBuilder("./scripts/export-patients.sh");
+            Process process = processBuilder.start();
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            StringBuilder output = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
+            }
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                return output.toString();
+            } else {
+                throw new RuntimeException("Script failed with exit code " + exitCode);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error exporting patients info", e);
+        }
     }
 
     public String exportAnalytics() {
