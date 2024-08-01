@@ -19,6 +19,7 @@ public class AdminView extends UserView{
             Scanner in = new Scanner(System.in);
            String op=in.nextLine();
            if(op.equals("1")){
+             System.out.println("Enter email");
              String email = in.nextLine();
              System.out.println("generating a UUID");
              String uuid=adminController.initiateRegistration(email);
@@ -26,7 +27,7 @@ public class AdminView extends UserView{
                  System.out.println("error generating uuid");
                  continue;
              }
-             System.out.println("uuid is: " + uuid);
+             System.out.println("uuid is: gsdvgsvdsdhb " + uuid);
            }
            else if(op.equals("2")){ break;}
            else if(op.equals("3")){ System.exit(0); }
