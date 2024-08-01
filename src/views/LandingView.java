@@ -74,7 +74,8 @@ public class LandingView {
 
              System.out.println(" HIV status \n 1. tested positive \n 2.tested negative");
              String st;
-             Date dobj2= null;
+             Date diagDate= null;
+             Date artDate=null;
              boolean stCheck=false;
              while(!stCheck){
                  st=in.nextLine();
@@ -84,15 +85,18 @@ public class LandingView {
                          hivStatus = true;
                          System.out.println("when is your diagnosis date mm/dd/yyyy");
 
-                         dobj2= vops.performDateCheck("Invalid date. Enter again or * to go back",
+                         diagDate= vops.performDateCheck("Invalid date. Enter again or * to go back",
                                  authenticationController::dateValid
                          );
-                         if(dobj2==null) continue;
+                         if(diagDate==null) continue;
 
                          System.out.println("Are you currently on ART? 1. yes 2.No");
                          String art = in.nextLine();
                          if (art.equals("1")) {
                              takingART = true;
+                             System.out.println("Enter date of start for the treatment");
+                             artDate=vops.performDateCheck("invalid date", authenticationController::dateValid);
+                             if(artDate==null) continue;
                          }
                      }
                      stCheck = true;
@@ -126,7 +130,7 @@ public class LandingView {
                  if(cpass.equals("*")) continue;
              }
              RegisterData rdata= new RegisterData(uuid, fName, lName ,dobj,
-                     hivStatus,dobj2, dobj2, takingART, isoCode, password
+                     hivStatus,diagDate, diagDate, takingART, isoCode, password
              );
 
              System.out.println("registering a user....");
