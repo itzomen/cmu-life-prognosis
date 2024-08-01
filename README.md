@@ -8,7 +8,7 @@
    - Email: `admin@email.com`
    - Password: `password`
 4. Login as a user with the following credentials:
-   - Email: `user@email.com`
+   - Email: `patient@email.com`
    - Password: `passworD123`
 
 ## File Store Description
