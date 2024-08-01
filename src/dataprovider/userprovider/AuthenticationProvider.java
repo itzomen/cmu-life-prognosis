@@ -2,6 +2,8 @@ package dataprovider.userprovider;
 
 import constants.Role;
 import models.intermediate.RegisterData;
+import models.user.Admin;
+import models.user.Patient;
 import models.user.User;
 
 import java.io.BufferedReader;
@@ -20,17 +22,22 @@ public class AuthenticationProvider{
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("data: ")) {
                     String[] userDetails = line.substring(6).split(":");
-                    User user = new User() {
-                        {
-                            // uuid = userDetails[0];
-                            email = userDetails[1];
-                            role = Role.valueOf(userDetails[2].toUpperCase());
-                            password = userDetails[3];
-                            fName = userDetails[4];
-                            lName = userDetails[5];
-                            // Set other fields if needed
-                        }
-                    };
+                    
+                    User user;
+        
+                    if (Role.valueOf(userDetails[2].toUpperCase()) == Role.ADMIN) {
+                        user = new Admin();
+                        user.setRole(Role.ADMIN);
+                        
+                    }
+                    else{
+                        user = new Patient();
+                        user.setRole(Role.PATIENT);
+                    }
+                    user.setEmail(userDetails[1]);
+                    user.setFname(userDetails[4]);
+                    user.setLName(userDetails[5]);
+
                     return user;
                 }
             }

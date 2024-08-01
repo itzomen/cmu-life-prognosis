@@ -22,6 +22,12 @@ abstract public class User{
     public String getEmail() {
         return email;
     }
+    public void setEmail(String email){
+        this.email = email;
+    }
+    public void setLName(String lName){
+        this.lName = lName;
+    }
 
     protected String password;
 
@@ -38,6 +44,9 @@ abstract public class User{
     public String getFName(){
 
         return fName;
+    }
+    public void setFname(String fName){
+        this.fName = fName;
     }
 
 
