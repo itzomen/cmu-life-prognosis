@@ -2,7 +2,7 @@ package views.userview;
 
 import controllers.usercontroller.AdminController;
 import models.intermediate.ValidationOutput;
-import views.util.ValidConcreteOperation;
+import views.util.validviewutil.ValidConcreteOperation;
 
 import java.util.Scanner;
 
