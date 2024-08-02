@@ -1,6 +1,5 @@
 package models.intermediate;
 
-import java.util.Date;
 
 public class ValidationOutput {
 

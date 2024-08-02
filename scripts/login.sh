@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Login script
 # Usage: ./login.sh email password
 
