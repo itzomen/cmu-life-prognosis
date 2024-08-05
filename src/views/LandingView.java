@@ -1,23 +1,20 @@
 package views;
 
-import constants.Role;
 import controllers.usercontroller.AdminController;
 import controllers.usercontroller.PatientController;
 import dataprovider.userprovider.AdminProvider;
 import dataprovider.userprovider.PatientProvider;
+import views.util.displayutil.Messages;
 import models.intermediate.RegisterData;
 import models.intermediate.ValidationOutput;
+import models.user.Patient;
 import models.user.User;
 import views.userview.AdminView;
 import views.userview.PatientView;
 import views.userview.UserView;
-import views.util.ValidConcreteOperation;
-import views.util.ValidateOperation;
+import views.util.validviewutil.ValidConcreteOperation;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class LandingView {
@@ -153,23 +150,17 @@ public class LandingView {
                 continue;
             }
             UserView uview;
-            if(user.getRole()== Role.PATIENT){
+            if(user instanceof Patient){
                  uview= new PatientView(new PatientController(new PatientProvider()))  ;
            }
-            else{
+            else {
                  uview= new AdminView(new AdminController(new AdminProvider()));
             }
              uview.setUser(user);
              uview.start();
          }
          else if(s.equals("3")){
-             System.out.println("   Use the numberings to choose the options \n" +
-                     "   beware of input validations as names shouldn't contain number \n" +
-                     "   Password should be at least a length of 8, contain upper and lowercase letters \n"+
-                     "   UUID and email should be in a valid format \n" +
-                             "   Use * to go back to previous options \n" +
-                     "   Use exit options to stop the program \n"
-                     );
+            Messages.getHelpMessage();
          }
          else if(s.equals("4")){
             System.exit(0);
@@ -180,5 +171,4 @@ public class LandingView {
 
      }
   }
-
 }

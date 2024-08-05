@@ -16,15 +16,17 @@ public class AuthenticationProvider{
 
     public User login(String email, String password) {
         try {
-            ProcessBuilder pb = new ProcessBuilder("scripts/login.sh", email, password);
-            Process process = pb.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String[] cmd = new String[]{"/bin/bash", "./scripts/login.sh", email,password};
+            Process pr = Runtime.getRuntime().exec(cmd);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+            User user=null;
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith("data: ")) {
                     String[] userDetails = line.substring(6).split(":");
                     
-                    User user;
+        
         
                     if (Role.valueOf(userDetails[2].toUpperCase()) == Role.ADMIN) {
                         user = new Admin();
@@ -42,7 +44,7 @@ public class AuthenticationProvider{
                     return user;
                 }
             }
-            int exitCode = process.waitFor();
+            int exitCode = pr.waitFor();
             if (exitCode != 0) {
                 System.err.println("Login script exited with code " + exitCode);
             }
@@ -56,11 +58,11 @@ public class AuthenticationProvider{
     public void register(RegisterData rdata) {
         try {
             // Format dates as "dd/MM/yyyy"
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-            String dob = dateFormat.format(rdata.getDob());
-            String diagnosisDate = dateFormat.format(rdata.getDiagnosisDate());
-            String artDate = dateFormat.format(rdata.getArtDate());
+//             String dob = dateFormat.format(rdata.getDob());
+//             String diagnosisDate = dateFormat.format(rdata.getDiagnosisDate());
+//             String artDate = dateFormat.format(rdata.getArtDate());
 
             ProcessBuilder pb = new ProcessBuilder("scripts/register_user.sh",
                     rdata.getUuid(), rdata.getPassword(), rdata.getfName(), rdata.getlName(),
@@ -68,9 +70,13 @@ public class AuthenticationProvider{
                     diagnosisDate, String.valueOf(rdata.isTakingART()), artDate);
 
             Process process = pb.start();
-            process.waitFor();
+            int exitCode=process.waitFor();
+            if(exitCode!=0){
+                throw new Error("Unable to register");
+            }
+
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            throw new Error("unable to register");
         }
     }
 }
