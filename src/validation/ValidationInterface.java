@@ -40,13 +40,11 @@ public interface ValidationInterface {
         Date dobj=null;
         try{
             dobj= formatter.parse(date);
-
+            return dobj;    
         }
         catch(ParseException e){
-
+           return null;
         }
-        finally {
-            return dobj;
-        }
+        
     }
 }

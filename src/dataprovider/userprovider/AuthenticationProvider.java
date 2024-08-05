@@ -5,6 +5,7 @@ import models.intermediate.RegisterData;
 import models.user.Admin;
 import models.user.Patient;
 import models.user.User;
+import views.util.exceptions.UuidException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,15 +56,13 @@ public class AuthenticationProvider{
     }
 
 
-    public void register(RegisterData rdata) {
-        try {
+    public void register(RegisterData rdata) throws IOException, InterruptedException {
+       
             // Format dates as "dd/MM/yyyy"
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
             String dob = dateFormat.format(rdata.getDob());
-            String diagnosisDate = dateFormat.format(rdata.getDiagnosisDate());
-            String artDate = dateFormat.format(rdata.getArtDate());
-
+            String diagnosisDate = rdata.getDiagnosisDate()!=null? dateFormat.format(rdata.getDiagnosisDate()) : "";
+            String artDate = rdata.getArtDate()!=null? dateFormat.format(rdata.getArtDate()): "";
             ProcessBuilder pb = new ProcessBuilder("scripts/register_user.sh",
                     rdata.getUuid(), rdata.getPassword(), rdata.getfName(), rdata.getlName(),
                     dob, rdata.getIsoCode(), String.valueOf(rdata.isHivStatus()),
@@ -71,13 +70,10 @@ public class AuthenticationProvider{
 
             Process process = pb.start();
             int exitCode=process.waitFor();
-            if(exitCode!=0){
-                throw new RuntimeException("Unable to register");
+            if(exitCode==8){
+                throw new RuntimeException("UUId not found");
             }
-
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException("unable to register");
-        }
+        
     }
 }
 

@@ -48,9 +48,4 @@ abstract public class User{
     public void setFname(String fName){
         this.fName = fName;
     }
-
-
-    // TODO: continue on the getters
-
-
 }

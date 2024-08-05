@@ -2,6 +2,7 @@ package views.userview;
 
 import controllers.usercontroller.AdminController;
 import models.intermediate.ValidationOutput;
+import views.util.displayutil.PromptDisplay;
 import views.util.validviewutil.ValidConcreteOperation;
 
 import java.util.Scanner;
@@ -14,25 +15,21 @@ public class AdminView extends UserView {
     }
 
 
-    @Override
     public void start() {
         ValidConcreteOperation vops = new ValidConcreteOperation();
         ValidationOutput vout;
+        PromptDisplay pDisplay= new PromptDisplay(new Scanner(System.in),System.console());
         while (true) {
-            System.out.println("Hello "+ user.getFName());
-            System.out.println("""
+            System.out.println("Hello "+ user.getFName()+ "\n");
+            String op =  pDisplay.getText("""
                      1. Initiate a registration\s
                      2. Export user files \s
                      3. Get analytical information \s
                      4. go back\s
                      5. exit""");
-            Scanner in = new Scanner(System.in);
-            String op = in.nextLine();
             if (op.equals("1")) {
-                System.out.println("Enter email");
-
-                vout = vops.performCheck("Invalid email. Enter again or * to go back",
-                        adminController::emailValid
+                vout = vops.performCheck("Enter email","Invalid email. Enter again or * to go back",
+                        adminController::emailValid,false, pDisplay
                 );
                 if (!vout.isValid()) continue;
                 String email= vout.getInput();

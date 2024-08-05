@@ -1,5 +1,4 @@
 package controllers.usercontroller;
-
 import dataprovider.userprovider.PatientProvider;
 import validation.ValidationInterface;
 

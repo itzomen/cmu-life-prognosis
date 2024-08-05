@@ -13,8 +13,6 @@ public class AdminController implements ValidationInterface {
             return adminProvider.initiateRegistration(email);
         }
         catch (Exception e){
-            // print error
-            System.out.println("Error: "+e.getMessage());
             return null;
         }
     }

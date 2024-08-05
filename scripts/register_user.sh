@@ -30,7 +30,7 @@ done < user-store.txt
 if [ "$UUID_FOUND" = false ]; then
   rm user-store-temp.txt
   echo "Error: UUID not found"
-  exit 1
+  exit 8
 else
   mv user-store-temp.txt user-store.txt
   echo "User registration/update completed for UUID: $UUID"

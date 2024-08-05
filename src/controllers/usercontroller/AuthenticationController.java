@@ -1,13 +1,14 @@
 
 
 package controllers.usercontroller;
-
 import dataprovider.userprovider.AuthenticationProvider;
 import models.intermediate.RegisterData;
+import models.intermediate.RegistrationError;
 import models.user.User;
 import validation.ValidationInterface;
+import views.util.exceptions.UuidException;
 
-public class AuthenticationController implements ValidationInterface {
+public class AuthenticationController  implements ValidationInterface {
     final AuthenticationProvider authenticationProvider;
 
     public AuthenticationController(AuthenticationProvider authenticationProvider) {
@@ -24,16 +25,22 @@ public class AuthenticationController implements ValidationInterface {
        }
     }
 
-    public boolean register(RegisterData rdata){
+    public RegistrationError register(RegisterData rdata){
         try{
             authenticationProvider.register(rdata);
-            return true;
+            return new RegistrationError(false, false, true);
+        }
+        catch(UuidException uuidException){
+            System.out.println("checked"); 
+            return new RegistrationError(false, true, false);
         }
         catch(Exception e){
-            return false;
+            return new RegistrationError(true, false, false);
         }
 
     }
+
+    
 
 
 }
