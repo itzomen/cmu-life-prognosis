@@ -1,0 +1,5 @@
+UUID,Email,Role,Password,First Name,Last Name,Date of Birth,HIV Status,Diagnosis Date,ART Status,ART Date
+bef8e462-0e5e-4abd-8316-3cea7895a704,patient@email.com,patient,9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f,Patient,One,04/01/2002,US,true,04/01/2002,false:bef8e462-0e5e-4abd-8316-3cea7895a7040
+a211a8fb-fd3c-4e16-b8cd-857cd7ac9433,john.doe@email.com,patient,9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f,John,Doe,04/01/2004,US,true,04/01/2010,true:a211a8fb-fd3c-4e16-b8cd-857cd7ac94330
+3bd54548-b7fb-4ea1-8566-c2690b30a788,jane.smith@email.com,patient,9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f,Jane,Smith,04/01/1990,US,true,04/01/2001,false:3bd54548-b7fb-4ea1-8566-c2690b30a7880
+4f0fb394-9820-4cef-86e6-8c5cdb0b1695,alex.jones@email.com,patient,9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f,Alex,Jones,04/01/1999,US,true,04/01/2024,true:4f0fb394-9820-4cef-86e6-8c5cdb0b16950

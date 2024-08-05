@@ -9,6 +9,7 @@ import models.user.User;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 
 
 public class AuthenticationProvider{
@@ -56,13 +57,18 @@ public class AuthenticationProvider{
 
     public void register(RegisterData rdata) {
         try {
-            
-        
-            
+            // Format dates as "dd/MM/yyyy"
+//             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+//             String dob = dateFormat.format(rdata.getDob());
+//             String diagnosisDate = dateFormat.format(rdata.getDiagnosisDate());
+//             String artDate = dateFormat.format(rdata.getArtDate());
+
             ProcessBuilder pb = new ProcessBuilder("scripts/register_user.sh",
-                                rdata.getUuid(), rdata.getPassword(), rdata.getfName(), rdata.getlName(),
-                                rdata.getDob().toString(), rdata.getIsoCode(), String.valueOf(rdata.isHivStatus()),
-                                rdata.getDiagnosisDate().toString(), String.valueOf(rdata.isTakingART()), rdata.getArtDate().toString());
+                    rdata.getUuid(), rdata.getPassword(), rdata.getfName(), rdata.getlName(),
+                    dob, rdata.getIsoCode(), String.valueOf(rdata.isHivStatus()),
+                    diagnosisDate, String.valueOf(rdata.isTakingART()), artDate);
+
             Process process = pb.start();
             int exitCode=process.waitFor();
             if(exitCode!=0){
