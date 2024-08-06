@@ -19,11 +19,21 @@ public class AdminController implements ValidationInterface {
 
 
     public String exportPatientsInfo() {
-        return adminProvider.exportPatientsInfo();
+        try {
+          return adminProvider.exportPatientsInfo();
+
+        }
+        catch(Exception e){
+            return null;
+        }
     }
 
     public String exportAnalytics() {
+       try {
         return adminProvider.exportAnalytics();
+       } catch (Exception e) {
+         return null;    
+    }
     }
 
 }
