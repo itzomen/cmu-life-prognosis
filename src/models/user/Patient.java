@@ -8,9 +8,10 @@ public class Patient extends User{
     private Date dob;
     private boolean HIVStatus;
     private Date diagnsisDate;
+    private Date artDate;
     
     public Patient(String fName, String lName, String email,Date dob, boolean hIVStatus, 
-    Date diagnsisDate, boolean takingART, String iSOCode, Role role) {
+    Date diagnsisDate, boolean takingART, Date artDate,  String iSOCode, Role role) {
         this.fName=fName;
         this.lName=lName;
         this.email=email;
@@ -18,6 +19,7 @@ public class Patient extends User{
         HIVStatus = hIVStatus;
         this.diagnsisDate = diagnsisDate;
         this.takingART = takingART;
+        this.artDate=artDate;
         ISOCode = iSOCode;
     }
 
@@ -26,6 +28,20 @@ public class Patient extends User{
     public Date getDiagnsisDate() {
         return diagnsisDate;
     }
+
+    
+
+    public Date getArtDate() {
+        return artDate;
+    }
+
+
+
+    public void setArtDate(Date artDate) {
+        this.artDate = artDate;
+    }
+
+
 
     public Date getDob() {
         return dob;

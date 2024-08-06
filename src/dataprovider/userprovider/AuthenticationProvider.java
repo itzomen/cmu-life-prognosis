@@ -10,12 +10,14 @@ import views.util.exceptions.UuidException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AuthenticationProvider {
 
-    public User login(String email, String password) throws InterruptedException, IOException {
+    public User login(String email, String password) throws InterruptedException, IOException, ParseException {
 
         String[] cmd = new String[] { "/bin/bash", "./scripts/login.sh", email, password };
         Process pr = Runtime.getRuntime().exec(cmd);
@@ -23,6 +25,7 @@ public class AuthenticationProvider {
         BufferedReader reader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
         User user = null;
         String line;
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         while ((line = reader.readLine()) != null) {
             if (line.startsWith("data: ")) {
                 String[] userDetails = line.substring(6).split(":");
@@ -45,7 +48,14 @@ public class AuthenticationProvider {
 
                 } else {
                     Date testDate= new Date(1000);
-                    user = new Patient(userDetails[4],userDetails[5], userDetails[1],testDate,false, testDate, false, "US",
+                    Date dob= userDetails[6].isEmpty() ? null: df.parse(userDetails[6]);
+                    boolean isHiv= userDetails[8].isEmpty()? false: Boolean.parseBoolean(userDetails[8]); 
+                    Date diDate= userDetails[9].isEmpty() ? null : df.parse(userDetails[9]);
+                    boolean takArt= userDetails[10].isEmpty() ? false :Boolean.parseBoolean(userDetails[10]);
+                    Date  artDate= userDetails[11].isEmpty() ? null :   df.parse(userDetails[11]);
+
+                    user = new Patient(userDetails[4],userDetails[5], userDetails[1],dob,isHiv, diDate,
+                     takArt, artDate, "US",
                     Role.PATIENT
                     );
                     
