@@ -8,6 +8,26 @@ public class Patient extends User{
     private Date diagnsisDate;
     private boolean takingART;
 
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public void setHIVStatus(boolean hIVStatus) {
+        HIVStatus = hIVStatus;
+    }
+
+    public void setDiagnsisDate(Date diagnsisDate) {
+        this.diagnsisDate = diagnsisDate;
+    }
+
+    public void setTakingART(boolean takingART) {
+        this.takingART = takingART;
+    }
+
+    public void setISOCode(String iSOCode) {
+        ISOCode = iSOCode;
+    }
+
     public Date getDiagnsisDate() {
         return diagnsisDate;
     }

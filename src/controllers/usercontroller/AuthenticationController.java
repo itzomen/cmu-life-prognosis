@@ -31,7 +31,6 @@ public class AuthenticationController  implements ValidationInterface {
             return new RegistrationError(false, false, true);
         }
         catch(UuidException uuidException){
-            System.out.println("checked"); 
             return new RegistrationError(false, true, false);
         }
         catch(Exception e){
