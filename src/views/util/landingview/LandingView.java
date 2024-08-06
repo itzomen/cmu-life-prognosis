@@ -34,6 +34,8 @@ public class LandingView {
             ValidationOutput vout;
             DisplayStatus displayStatus= new DisplayStatus(pDisplay, authenticationController, vops);
 
+            //code refactored for better collaboration
+
             String s = pDisplay.getText(" 1. register \n 2. login \n 3. help \n 4. exit \n ");
             if (s.equals("1")) {
 
