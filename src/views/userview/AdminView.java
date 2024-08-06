@@ -21,7 +21,7 @@ public class AdminView extends UserView {
         ValidationOutput vout;
         PromptDisplay pDisplay= new PromptDisplay(new Scanner(System.in), System.console());
         while (true) {
-            System.out.println("Hello "+ user.getFName());
+            System.out.println("Hello "+ user.getfName());
             String op = pDisplay.getText("""
                      1. Initiate a registration\s
                      2. Export user files \s
