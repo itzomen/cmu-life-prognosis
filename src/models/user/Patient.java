@@ -2,31 +2,26 @@ package models.user;
 
 import java.util.Date;
 
+import constants.Role;
+
 public class Patient extends User{
     private Date dob;
     private boolean HIVStatus;
     private Date diagnsisDate;
-    private boolean takingART;
-
-    public void setDob(Date dob) {
+    
+    public Patient(String fName, String lName, String email,Date dob, boolean hIVStatus, 
+    Date diagnsisDate, boolean takingART, String iSOCode, Role role) {
+        this.fName=fName;
+        this.lName=lName;
+        this.email=email;
         this.dob = dob;
-    }
-
-    public void setHIVStatus(boolean hIVStatus) {
         HIVStatus = hIVStatus;
-    }
-
-    public void setDiagnsisDate(Date diagnsisDate) {
         this.diagnsisDate = diagnsisDate;
-    }
-
-    public void setTakingART(boolean takingART) {
         this.takingART = takingART;
-    }
-
-    public void setISOCode(String iSOCode) {
         ISOCode = iSOCode;
     }
+
+    private boolean takingART;
 
     public Date getDiagnsisDate() {
         return diagnsisDate;

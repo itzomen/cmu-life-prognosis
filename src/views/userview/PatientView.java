@@ -15,11 +15,11 @@ public class PatientView extends UserView{
     public void start() {
        outerloop:
        while(true){
-           System.out.println("Hello "+ user.getFName()+ "\n");           
+           System.out.println("Hello "+ user.getfName()+ "\n");           
            String op= pDisplay.getText("1. view profile info \n 2. go back \n 3. exit");
            switch(op){
                case "1"->{
-                   System.out.println("First name: "+ user.getFName());
+                   System.out.println("First name: "+ user.getfName());
                    System.out.println("Last name: " + user.getlName());
                    System.out.println("Email: " + user.getEmail());
                }

@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AuthenticationProvider {
 
@@ -27,20 +28,15 @@ public class AuthenticationProvider {
                 String[] userDetails = line.substring(6).split(":");
 
                 if (Role.valueOf(userDetails[2].toUpperCase()) == Role.ADMIN) {
-                    user = new Admin();
-                    user.setRole(Role.ADMIN);
+                    user = new Admin(userDetails[4],userDetails[5], userDetails[1], Role.ADMIN);
 
                 } else {
-                    user = new Patient();
-                    Patient p= (Patient) user;
-                    p.setRole(Role.PATIENT);
-                    p.setDiagnsisDate(null);
-                    // TODO continue on the setter
+                    Date testDate= new Date(1000);
+                    user = new Patient(userDetails[4],userDetails[5], userDetails[1],testDate,false, testDate, false, "US",
+                    Role.PATIENT
+                    );
+                    
                 }
-                user.setEmail(userDetails[1]);
-                user.setFname(userDetails[4]);
-                user.setLName(userDetails[5]);
-
                 return user;
             }
         }
