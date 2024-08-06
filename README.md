@@ -43,3 +43,4 @@ The fields are as follows:
 - No passing the password through the provider, do authentication immediately.
 - Change date format for saving to the data store.
 - Check functionality of register feature
+
