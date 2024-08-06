@@ -28,6 +28,19 @@ public class AuthenticationProvider {
                 String[] userDetails = line.substring(6).split(":");
 
                 if (Role.valueOf(userDetails[2].toUpperCase()) == Role.ADMIN) {
+                    // `uuid`: A unique identifier for the user.
+                    // - `email`: The email address of the user.
+                    // - `role`: The role of the user. Can be either `admin` or `patient`.
+                    // - `hashed_password`: The hashed password of the user.
+                    // - `first_name`: The first name of the user.
+                    // - `last_name`: The last name of the user.
+                    // - `dob`: The date of birth of the user.
+                    // - `country`: The country of the user.
+                    // - `hiv_status`: The HIV status of the user. (true or false)
+                    // - `diagnosis_date`: The date of diagnosis of the user.
+                    // - `art_status`: The ART status of the user. (true or false)
+                    // - `art_date`: The date the patient started ART drugs.
+                    System.out.println(userDetails[6]); 
                     user = new Admin(userDetails[4],userDetails[5], userDetails[1], Role.ADMIN);
 
                 } else {

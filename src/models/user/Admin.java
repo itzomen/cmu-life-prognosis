@@ -9,5 +9,6 @@ public class Admin extends User{
     this.lName=lName;
     this.email=email;
     this.role=role;
+    this.fName=fName;
    } 
 }
