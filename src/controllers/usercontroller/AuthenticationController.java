@@ -20,7 +20,8 @@ public class AuthenticationController  implements ValidationInterface {
           return authenticationProvider.login(username, password);
        }
        catch(Exception e){
-           // login error
+           // login 
+           e.printStackTrace();
            return null;
        }
     }

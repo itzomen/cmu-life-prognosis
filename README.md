@@ -28,7 +28,7 @@ The fields are as follows:
 - `first_name`: The first name of the user.
 - `last_name`: The last name of the user.
 - `dob`: The date of birth of the user.
-- `Iso code`: The country of the user.
+- `country`: The country of the user.
 - `hiv_status`: The HIV status of the user. (true or false)
 - `diagnosis_date`: The date of diagnosis of the user.
 - `art_status`: The ART status of the user. (true or false)
@@ -39,9 +39,10 @@ The fields are as follows:
 
 - Create assignment checklist.
 - Add Iso code to user and update export to include it.
+- Add descriptions of all the files in user-store.txt or files used as data store.
+- No passing the password through the provider, do authentication immediately.
 - Change date format for saving to the data store.
 - Check functionality of register feature
-- Update registration to include option to set role.
-- Handle duplicate email addresses in registration.
-- Need to update file description.
+- Check register back feature
+
 

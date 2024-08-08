@@ -43,11 +43,9 @@ public class AuthenticationProvider {
                     // - `diagnosis_date`: The date of diagnosis of the user.
                     // - `art_status`: The ART status of the user. (true or false)
                     // - `art_date`: The date the patient started ART drugs.
-                    System.out.println(userDetails[6]); 
                     user = new Admin(userDetails[4],userDetails[5], userDetails[1], Role.ADMIN);
 
                 } else {
-                    Date testDate= new Date(1000);
                     Date dob= userDetails[6].isEmpty() ? null: df.parse(userDetails[6]);
                     boolean isHiv= userDetails[8].isEmpty()? false: Boolean.parseBoolean(userDetails[8]); 
                     Date diDate= userDetails[9].isEmpty() ? null : df.parse(userDetails[9]);

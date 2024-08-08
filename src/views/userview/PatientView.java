@@ -1,8 +1,10 @@
 package views.userview;
 
 import controllers.usercontroller.PatientController;
+import models.user.Patient;
 import views.util.displayutil.PromptDisplay;
 
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class PatientView extends UserView{
@@ -13,15 +15,25 @@ public class PatientView extends UserView{
     }
 
     public void start() {
+       Patient patient= (Patient) user;
        outerloop:
        while(true){
-           System.out.println("Hello "+ user.getfName()+ "\n");           
+           System.out.println("Hello "+ patient.getfName()+ "\n");           
            String op= pDisplay.getText("1. view profile info \n 2. go back \n 3. exit");
            switch(op){
                case "1"->{
-                   System.out.println("First name: "+ user.getfName());
-                   System.out.println("Last name: " + user.getlName());
-                   System.out.println("Email: " + user.getEmail());
+                   System.out.println("--------------------------------");
+                   System.out.println("First name: "+ patient.getfName()+ " , "+ "Last name: " + patient.getlName());
+                   String hivMess= patient.isHIVStatus() ? "positive" : "negative";
+                   System.out.println("Email: " + patient.getEmail() + " , " + "Hiv status " + hivMess);
+                   if(patient.isHIVStatus()){
+                    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy"); 
+                    String diagDate = formatter.format(patient.getDiagnsisDate());  
+                    System.out.println("Diagnosis date: "+ diagDate + " , " + "taking ART: "+ patient.isTakingART() );
+                    if(patient.isTakingART()) System.out.print("ART start date: "+ formatter.format(patient.getArtDate()));
+                    System.out.println(" Date of birth: "+ formatter.format(patient.getDob()));
+                    System.out.println("Iso code: "+ patient.getISOCode()); 
+                   }
                }
 
                case "2"->{

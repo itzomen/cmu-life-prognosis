@@ -34,6 +34,17 @@ public class ValidConcreteOperation {
         }
         return dobj;
     }
+    public Date artDateCheck(String pMessage,String message,
+     ValidateDateOperation operation, PromptDisplay pDisplay,Date diagDate, Date artDate){
+        String input="";
+        
+        while(artDate.before(diagDate)){
+            System.out.println(message);
+            input = pDisplay.getText(pMessage);
+            artDate= operation.dateCheck(input);
+        }
+       return artDate; 
+    }
     public boolean checkPassConfirmation(String password, PromptDisplay pDisplay){
         String cpass= pDisplay.getPassword("Confirm password");
         while(!cpass.equals(password)){
