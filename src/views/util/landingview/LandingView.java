@@ -16,7 +16,7 @@ import views.userview.PatientView;
 import views.userview.UserView;
 import views.util.validviewutil.ValidConcreteOperation;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class LandingView {
@@ -62,7 +62,7 @@ public class LandingView {
                     continue;
                 lName = vout.getInput();
 
-                Date dobj = null;
+                LocalDate dobj = null;
                 dobj = vops.performDateCheck("Enter DOB mm/dd/yyyy","Invalid DOB. Enter again or * to go back",
                         authenticationController::dateValid,pDisplay);
                 if (dobj == null)
@@ -71,10 +71,11 @@ public class LandingView {
 
                
                 HivStatus hstat= displayStatus.getStatusInfo();
-                Date diagDate = hstat.diagDate;
-                Date artDate = hstat.artDate;
+                LocalDate diagDate = hstat.diagDate;
+                LocalDate artDate = hstat.artDate;
                 hivStatus= hstat.status;
                 takingART=hstat.takingART;
+                if(!hstat.valid) break;
 
                 vout = vops.performCheck("Enter the ISO code of your country? ","Invalid ISO code. Enter again or * to go back",
                         authenticationController::isoValid, false, pDisplay);

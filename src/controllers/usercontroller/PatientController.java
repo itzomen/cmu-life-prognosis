@@ -23,7 +23,7 @@ public class PatientController implements ValidationInterface {
   }
 
   public Expectancy getDemiseDate(Patient patient, double avLSpan) {
-    long avlSpanl= Double.valueOf(avLSpan).longValue();
+    long avlSpanl=(long)Math.ceil(avLSpan);
     LocalDate dob = LocalDate.ofInstant(patient.getDob().toInstant(), ZoneId.systemDefault());
     LocalDate now = LocalDate.ofInstant(new Date().toInstant(), ZoneId.systemDefault());
     LocalDate spanEndDate= dob.plusYears(avlSpanl);
@@ -53,7 +53,7 @@ public class PatientController implements ValidationInterface {
           LocalDate lastDate= now.plusYears(remYears);
           return new Expectancy(lastDate, remYears);
         }
-        else if(yDelay > 0){
+        else{
           double remY= 0.9 * (Math.pow(0.9, yDelay)) * maxSpanYear;
           long remYears= (long) Math.ceil(remY);
           LocalDate lastDate= now.plusYears(remYears);

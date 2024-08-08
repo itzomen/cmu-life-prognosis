@@ -1,18 +1,20 @@
 package views.util.landingview;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class HivStatus {
 
     boolean status;
-    Date diagDate;
+    LocalDate diagDate;
     boolean takingART;
-    Date artDate;
-    public HivStatus(boolean status, Date diagDate, boolean takingART, Date artDate) {
+    LocalDate artDate;
+    boolean valid;
+    public HivStatus(boolean status, LocalDate diagDate, boolean takingART, LocalDate artDate, boolean valid) {
         this.status = status;
         this.diagDate = diagDate;
         this.takingART = takingART;
         this.artDate = artDate;
+        this.valid=valid;
     }
     
 

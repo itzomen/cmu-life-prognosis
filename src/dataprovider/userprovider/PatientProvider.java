@@ -1,6 +1,5 @@
 package dataprovider.userprovider;
 
-import models.user.Patient;
 
 public class PatientProvider {
     // isoCode is 2 alpha code

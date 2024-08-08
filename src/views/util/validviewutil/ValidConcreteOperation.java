@@ -3,7 +3,7 @@ package views.util.validviewutil;
 import models.intermediate.ValidationOutput;
 import views.util.displayutil.PromptDisplay;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ValidConcreteOperation {
     public ValidationOutput performCheck( String pMessage,String message, ValidateOperation operation, 
@@ -21,29 +21,35 @@ public class ValidConcreteOperation {
         }
         return new ValidationOutput(input, true);
     }
-    public Date performDateCheck(String pMessage,String message, ValidateDateOperation operation, PromptDisplay pDisplay) {
+    public LocalDate performDateCheck(String pMessage,String message, ValidateDateOperation operation, PromptDisplay pDisplay) {
 
-        boolean validToken = false;
         String input="";
-        Date dobj=null;
-        while(!validToken){
+        LocalDate dobj=null;
+        while(dobj==null){
             input = pDisplay.getText(pMessage);
+            if(input==null) break;
             dobj =operation.dateCheck(input);
-            validToken= dobj!=null;
-            if(!validToken) System.out.println(message);
+            if(dobj==null || !dobj.isBefore(LocalDate.now())) {
+                System.out.println(message);
+                dobj=null;
+            }
         }
         return dobj;
     }
-    public Date artDateCheck(String pMessage,String message,
-     ValidateDateOperation operation, PromptDisplay pDisplay,Date diagDate, Date artDate){
+    public LocalDate performDateRangeCheck(String pMessage,String message,
+     ValidateDateOperation operation, PromptDisplay pDisplay,LocalDate befDate){
         String input="";
-        
-        while(artDate.before(diagDate)){
-            System.out.println(message);
+        LocalDate dobj= null;
+        while(dobj==null){
             input = pDisplay.getText(pMessage);
-            artDate= operation.dateCheck(input);
+            if(input==null) break;
+            dobj= operation.dateCheck(input);
+            if(dobj==null || !dobj.isBefore(LocalDate.now() ) || dobj.isBefore(befDate)){
+                dobj=null;
+                System.out.println(message);
+            } 
         }
-       return artDate; 
+       return dobj; 
     }
     public boolean checkPassConfirmation(String password, PromptDisplay pDisplay){
         String cpass= pDisplay.getPassword("Confirm password");

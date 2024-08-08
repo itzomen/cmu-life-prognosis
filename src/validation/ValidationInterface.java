@@ -2,10 +2,9 @@ package validation;
 
 import constants.ISO;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public interface ValidationInterface {
 
@@ -35,16 +34,28 @@ public interface ValidationInterface {
         );
     }
 
-    default Date dateValid(String date){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy", Locale.ENGLISH);
-        Date dobj=null;
+    default LocalDate dateValid(String date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        
         try{
-            dobj= formatter.parse(date);
-            return dobj;    
+            LocalDate localDate = LocalDate.parse(date, formatter);
+            return localDate;    
         }
-        catch(ParseException e){
+        catch(DateTimeParseException e){
            return null;
         }
-        
+
+    }
+    default boolean beforeNow(LocalDate date){
+        LocalDate nowDate= LocalDate.now();
+        return date.isBefore(nowDate); 
+    }
+
+    default boolean checkDateRange(LocalDate date, LocalDate leDate){
+        LocalDate nowDate= LocalDate.now();
+        if(!date.isBefore(leDate) && date.isBefore(nowDate) ){
+            return true;
+        }
+        return false;
     }
 }

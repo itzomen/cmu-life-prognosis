@@ -66,11 +66,10 @@ public class AuthenticationProvider {
 
     public void register(RegisterData rdata) throws IOException, InterruptedException {
 
-        // Format dates as "dd/MM/yyyy"
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String dob = dateFormat.format(rdata.getDob());
-        String diagnosisDate = rdata.getDiagnosisDate() != null ? dateFormat.format(rdata.getDiagnosisDate()) : "";
-        String artDate = rdata.getArtDate() != null ? dateFormat.format(rdata.getArtDate()) : "";
+        
+        String dob = rdata.getDob().toString();
+        String diagnosisDate = rdata.getDiagnosisDate() != null ? rdata.getDiagnosisDate().toString() : "";
+        String artDate = rdata.getArtDate() != null ? rdata.getArtDate().toString() : "";
         ProcessBuilder pb = new ProcessBuilder("scripts/register_user.sh",
                 rdata.getUuid(), rdata.getPassword(), rdata.getfName(), rdata.getlName(),
                 dob, rdata.getIsoCode(), String.valueOf(rdata.isHivStatus()),

@@ -1,7 +1,7 @@
 package views.util.validviewutil;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public interface ValidateDateOperation {
- Date dateCheck(String token);
+ LocalDate dateCheck(String token);
 }

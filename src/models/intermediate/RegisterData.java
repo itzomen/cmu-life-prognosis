@@ -1,13 +1,13 @@
 package models.intermediate;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class RegisterData{
     final String uuid, fName, lName, isoCode, password;
-    final Date dob, diagnosisDate, artDate;
+    final LocalDate dob, diagnosisDate, artDate;
     final boolean hivStatus, takingART;
-    public RegisterData(String uuid, String fName, String lName, Date dob,
-                        boolean hivStatus, Date artDate, Date diagnosisDate,
+    public RegisterData(String uuid, String fName, String lName, LocalDate dob,
+                        boolean hivStatus, LocalDate artDate, LocalDate diagnosisDate,
                         boolean takingART, String isoCode, String password) {
         this.uuid = uuid;
         this.fName = fName;
@@ -31,10 +31,10 @@ public class RegisterData{
     public String getlName() {
         return lName;
     }
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
-    public Date getDiagnosisDate() {
+    public LocalDate getDiagnosisDate() {
         return diagnosisDate;
     }
     public boolean isHivStatus() {
@@ -43,7 +43,7 @@ public class RegisterData{
     public boolean isTakingART() {
         return takingART;
     }
-    public Date getArtDate() {
+    public LocalDate getArtDate() {
         return artDate;
     }
     public String getIsoCode() {
