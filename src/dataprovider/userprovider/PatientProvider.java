@@ -18,7 +18,7 @@ public class PatientProvider {
         try {
             ProcessBuilder pb = new ProcessBuilder("bash", "-c", "../scripts/Predict.sh ../user-store.txt ../life-expectancy.csv");
             Map<String, String> env = pb.environment();
-            env.put("patientEmail", "abel@email.com");
+            env.put("patientEmail", email);
 
             Process p = pb.start();
             
