@@ -1,19 +1,15 @@
+package dataprovider.userprovider;
+
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-package dataprovider.userprovider;
-
-
-
 public class PatientProvider {
     
     // isoCode is 2 alpha code
-    public String getLifeSpan(String email) {
-
-        String lifespan;
+    public int getLifeSpan(String email) {
+        int lifespan = 0;  // Default lifespan initialization
 
         try {
             ProcessBuilder pb = new ProcessBuilder("bash", "-c", "../scripts/Predict.sh ../user-store.txt ../life-expectancy.csv");
@@ -24,7 +20,9 @@ public class PatientProvider {
             
             // Reading output from the process
             BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            lifespan = reader.lines().collect(Collectors.joining("\n"));
+            String output = reader.lines().collect(Collectors.joining("\n"));
+
+            lifespan = Integer.parseInt(output);  // Correctly convert string to integer
             
             // System.out.println(lifespan);
         } catch (Exception e) {
@@ -33,6 +31,4 @@ public class PatientProvider {
 
         return lifespan;
     }
-    
-
 }
