@@ -1,9 +1,9 @@
 package validation;
 
 import constants.ISO;
+import views.util.formatter.CustomFormatter;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public interface ValidationInterface {
@@ -35,10 +35,9 @@ public interface ValidationInterface {
     }
 
     default LocalDate dateValid(String date){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        
+      
         try{
-            LocalDate localDate = LocalDate.parse(date, formatter);
+            LocalDate localDate = LocalDate.parse(date,CustomFormatter.formatter);
             return localDate;    
         }
         catch(DateTimeParseException e){

@@ -1,11 +1,9 @@
 package views.userview;
 
 import controllers.usercontroller.PatientController;
-import models.intermediate.Expectancy;
 import models.user.Patient;
 import views.util.displayutil.PromptDisplay;
 
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class PatientView extends UserView{
@@ -20,7 +18,7 @@ public class PatientView extends UserView{
        outerloop:
        while(true){
            System.out.println("Hello "+ patient.getfName()+ "\n");           
-           String op= pDisplay.getText("1. view profile info \n 2. Update profile \n 3. go back \n 4. exit");
+           String op= pDisplay.getText(" 1. view profile info \n 2. Update profile \n 3. go back \n 4. exit");
            switch(op){
                case "1"->{
                    System.out.println("--------------------------------");
@@ -28,22 +26,24 @@ public class PatientView extends UserView{
                    String hivMess= patient.isHIVStatus() ? "positive" : "negative";
                    System.out.println("Email: " + patient.getEmail() + " , " + "Hiv status " + hivMess);
                    if(patient.isHIVStatus()){
-                    SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy"); 
-                    String diagDate = formatter.format(patient.getDiagnsisDate());  
+                    String diagDate = patient.getDiagnsisDate().toString();  
                     System.out.println("Diagnosis date: "+ diagDate + " , " + "taking ART: "+ patient.isTakingART() );
-                    if(patient.isTakingART()) System.out.print("ART start date: "+ formatter.format(patient.getArtDate()));
-                    System.out.println(" Date of birth: "+ formatter.format(patient.getDob()));
+                    if(patient.isTakingART()) System.out.print("ART start date: "+ patient.getArtDate().toString());
+                    System.out.println(" Date of birth: "+ patient.getDob().toString());
                     System.out.println("Iso code: "+ patient.getISOCode());
+                    System.out.println("\nHealth prediction information: \n\n");
+        
+                    // System.out.println("Date of Demise: "+ exp.getDate().toString()
+                    // );
+                    // System.out.println("Years to live: " + exp.getRemYears()+ "\n\n"); 
                     System.out.println("--------------------------------\n\n");
-                    System.out.println("Health prediction information: ");
-                    double avlSpan= patientController.getLifeSpan(patient.getISOCode());
-                    Expectancy exp= patientController.getDemiseDate(patient, avlSpan);
-                    System.out.println("Demise date: "+ formatter.format(exp.getDate())); 
-                    System.out.println("Years to live: " + exp.getRemYears());                   
+
                    }
                }
                case "2"->{
-                    System.out.println("Update profile information"); 
+                    System.out.println("Update profile information or leave empty for the default values"); 
+                    System.out.println("--------------------------------");
+
                }
                case "3"->{
                    break outerloop;

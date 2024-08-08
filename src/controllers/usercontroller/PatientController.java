@@ -1,13 +1,7 @@
 package controllers.usercontroller;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Date;
-
+import constants.Role;
 import dataprovider.userprovider.PatientProvider;
-import models.intermediate.Expectancy;
+import models.intermediate.UpdateData;
 import models.user.Patient;
 import validation.ValidationInterface;
 
@@ -18,50 +12,22 @@ public class PatientController implements ValidationInterface {
     this.patientProvider = patientProvider;
   }
 
-  public double getLifeSpan(String isoCode) {
+  public int getLifeSpan(String isoCode) {
     return patientProvider.getLifeSpan(isoCode);
   }
 
-  public Expectancy getDemiseDate(Patient patient, double avLSpan) {
-    long avlSpanl=(long)Math.ceil(avLSpan);
-    LocalDate dob = LocalDate.ofInstant(patient.getDob().toInstant(), ZoneId.systemDefault());
-    LocalDate now = LocalDate.ofInstant(new Date().toInstant(), ZoneId.systemDefault());
-    LocalDate spanEndDate= dob.plusYears(avlSpanl);
-
-    ZonedDateTime nowTime = now.atStartOfDay(ZoneId.systemDefault());
-    ZonedDateTime spanEndTime= spanEndDate.atStartOfDay(ZoneId.systemDefault());
-    long maxSpanYear= ChronoUnit.YEARS.between(nowTime, spanEndTime);
-    
-    
-    if (!patient.isHIVStatus()) {
-      return new Expectancy(spanEndDate, maxSpanYear);
-    }
-    else{
-      LocalDate diagDate= LocalDate.ofInstant(patient.getDiagnsisDate().toInstant(), ZoneId.systemDefault());
-      if(!patient.isTakingART()){
-        LocalDate lastDate= diagDate.plusYears(5);
-        ZonedDateTime lastTime= lastDate.atStartOfDay(ZoneId.systemDefault());
-        long remYearsL= ChronoUnit.YEARS.between(lastTime, nowTime);
-        return new Expectancy(lastDate, remYearsL);
+  public boolean updateProfile(String email,UpdateData udata){
+      try{
+        patientProvider.updateProfile(new Patient(udata.getfName(), udata.getlName(), email, udata.getDob(),
+         udata.ishIVStatus(), udata.getDiagnsisDate(), udata.isTakingART(), 
+         udata.getArtDate(), udata.getiSOCode(), Role.PATIENT));
+         return true;
       }
-      else{
-        LocalDate artDate= LocalDate.ofInstant(patient.getArtDate().toInstant(), ZoneId.systemDefault());
-        int yDelay= artDate.getYear() - diagDate.getYear();
-        if(yDelay==0){
-          double remY= 0.9 * maxSpanYear;
-          long remYears= (long) Math.ceil(remY);
-          LocalDate lastDate= now.plusYears(remYears);
-          return new Expectancy(lastDate, remYears);
-        }
-        else{
-          double remY= 0.9 * (Math.pow(0.9, yDelay)) * maxSpanYear;
-          long remYears= (long) Math.ceil(remY);
-          LocalDate lastDate= now.plusYears(remYears);
-          return new Expectancy(lastDate, remYears);
-        }
+      catch(Exception e){
+         return false;
       }
-    }
   }
-  // round up to the next full year
+
+
 
 }

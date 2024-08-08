@@ -1,17 +1,17 @@
 package models.user;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import constants.Role;
 
 public class Patient extends User{
-    private Date dob;
+    private LocalDate dob;
     private boolean HIVStatus;
-    private Date diagnsisDate;
-    private Date artDate;
+    private LocalDate diagnsisDate;
+    private LocalDate artDate;
     
-    public Patient(String fName, String lName, String email,Date dob, boolean hIVStatus, 
-    Date diagnsisDate, boolean takingART, Date artDate,  String iSOCode, Role role) {
+    public Patient(String fName, String lName, String email,LocalDate dob, boolean hIVStatus, 
+    LocalDate diagnsisDate, boolean takingART, LocalDate artDate,  String iSOCode, Role role) {
         this.fName=fName;
         this.lName=lName;
         this.email=email;
@@ -25,25 +25,25 @@ public class Patient extends User{
 
     private boolean takingART;
 
-    public Date getDiagnsisDate() {
+    public LocalDate getDiagnsisDate() {
         return diagnsisDate;
     }
 
     
 
-    public Date getArtDate() {
+    public LocalDate getArtDate() {
         return artDate;
     }
 
 
 
-    public void setArtDate(Date artDate) {
+    public void setArtDate(LocalDate artDate) {
         this.artDate = artDate;
     }
 
 
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
@@ -61,5 +61,9 @@ public class Patient extends User{
 
     private String ISOCode;
 
-    // getter and setters
+    public String toString() {
+        String shared= super.toString();
+        return shared + "dob: "+ dob.toString() + "hivStatus"+ this.HIVStatus+ "diagnosis date: "+ 
+        this.diagnsisDate.toString() + "ART: "+ String.valueOf(takingART) + artDate.toString() + ISOCode ;
+    }
 }

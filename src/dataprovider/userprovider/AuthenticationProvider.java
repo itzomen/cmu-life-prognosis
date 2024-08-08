@@ -6,14 +6,13 @@ import models.user.Admin;
 import models.user.Patient;
 import models.user.User;
 import views.util.exceptions.UuidException;
+import views.util.formatter.CustomFormatter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class AuthenticationProvider {
 
@@ -25,38 +24,28 @@ public class AuthenticationProvider {
         BufferedReader reader = new BufferedReader(new InputStreamReader(pr.getInputStream()));
         User user = null;
         String line;
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         while ((line = reader.readLine()) != null) {
             if (line.startsWith("data: ")) {
                 String[] userDetails = line.substring(6).split(":");
-
+                String fName = userDetails[4];
+                String lName=  userDetails[5];
                 if (Role.valueOf(userDetails[2].toUpperCase()) == Role.ADMIN) {
-                    // `uuid`: A unique identifier for the user.
-                    // - `email`: The email address of the user.
-                    // - `role`: The role of the user. Can be either `admin` or `patient`.
-                    // - `hashed_password`: The hashed password of the user.
-                    // - `first_name`: The first name of the user.
-                    // - `last_name`: The last name of the user.
-                    // - `dob`: The date of birth of the user.
-                    // - `country`: The country of the user.
-                    // - `hiv_status`: The HIV status of the user. (true or false)
-                    // - `diagnosis_date`: The date of diagnosis of the user.
-                    // - `art_status`: The ART status of the user. (true or false)
-                    // - `art_date`: The date the patient started ART drugs.
-                    user = new Admin(userDetails[4],userDetails[5], userDetails[1], Role.ADMIN);
+                    
+                    user = new Admin(fName,lName, email, Role.ADMIN);
 
                 } else {
-                    Date dob= userDetails[6].isEmpty() ? null: df.parse(userDetails[6]);
+                    LocalDate dob= userDetails[6].isEmpty() ? null: LocalDate.parse(userDetails[6], CustomFormatter.formatter);
                     boolean isHiv= userDetails[8].isEmpty()? false: Boolean.parseBoolean(userDetails[8]); 
-                    Date diDate= userDetails[9].isEmpty() ? null : df.parse(userDetails[9]);
+                    LocalDate diDate= userDetails[9].isEmpty() ? null : LocalDate.parse(userDetails[9], CustomFormatter.formatter);
                     boolean takArt= userDetails[10].isEmpty() ? false :Boolean.parseBoolean(userDetails[10]);
-                    Date  artDate= userDetails[11].isEmpty() ? null :   df.parse(userDetails[11]);
-
-                    user = new Patient(userDetails[4],userDetails[5], userDetails[1],dob,isHiv, diDate,
-                     takArt, artDate, "US",
+                    LocalDate  artDate= userDetails[11].isEmpty() ? null :   LocalDate.parse(userDetails[11], 
+                    CustomFormatter.formatter);
+                    
+                    user = new Patient(fName,lName, email,dob,isHiv, diDate,
+                     takArt, artDate, userDetails[7],
                     Role.PATIENT
                     );
-                    
+                    System.out.println(user.toString());
                 }
                 return user;
             }
