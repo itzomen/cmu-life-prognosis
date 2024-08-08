@@ -70,7 +70,7 @@ public class LandingView {
                 
 
                
-                HivStatus hstat= displayStatus.getStatusInfo();
+                HivStatus hstat= displayStatus.getStatusInfo(dobj);
                 LocalDate diagDate = hstat.diagDate;
                 LocalDate artDate = hstat.artDate;
                 hivStatus= hstat.status;

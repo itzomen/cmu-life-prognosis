@@ -18,7 +18,7 @@ public class DisplayStatus {
     this.vops = vops;
   }
 
-  public HivStatus getStatusInfo() {
+  public HivStatus getStatusInfo(LocalDate dob) {
     String st;
     LocalDate diagDate = null;
     LocalDate artDate = null;
@@ -34,9 +34,9 @@ public class DisplayStatus {
       else if (st.equals("1") || st.equals("2")) {
         if (st.equals("1")) {
           hivStatus = true;
-          diagDate = vops.performDateCheck("when is your diagnosis date mm/dd/yyyy",
+          diagDate = vops.performDateRangeCheck("when is your diagnosis date mm/dd/yyyy",
               "Invalid date. Enter again or * to go back",
-              authenticationController::dateValid, pDisplay);
+              authenticationController::dateValid, pDisplay, dob);
           if (diagDate == null)
             continue;
 
