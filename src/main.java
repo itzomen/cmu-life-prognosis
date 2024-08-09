@@ -4,7 +4,7 @@ import controllers.usercontroller.AuthenticationController;
 
 
 class HelathPrognosisApplication{
-    public static void main(String[] args)
+    public static void main(String[] a1rgs)
    {
         new LandingView(new AuthenticationController(new AuthenticationProvider())).start();
     }

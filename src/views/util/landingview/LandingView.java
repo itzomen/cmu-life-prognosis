@@ -37,7 +37,7 @@ public class LandingView {
 
             // code refactored for better collaboration
 
-            String s = pDisplay.getText(" 1. register \n 2. login \n 3. help \n 4. exit \n ");
+            String s = pDisplay.getText(" 1. Register \n 2. Login \n 3. Help \n 4. Exit \n ");
             if(s==null) break;
             else if (s.equals("1")) {
 

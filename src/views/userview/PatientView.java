@@ -34,7 +34,7 @@ public class PatientView extends UserView {
             System.out.println("Hello " + patient.getfName() + "\n");
             String op = pDisplay.getText(
 
-                    " 1. View profile info \n 2. Update profile \n 3. Update password \n 4. go back \n 5. exit");
+                    " 1. View profile info \n 2. Update profile \n 3. Go Back \n 4. Exit");
 
             if(op==null ) break;
             switch (op) {
@@ -51,7 +51,7 @@ public class PatientView extends UserView {
                         if (patient.isTakingART())
                             System.out
 
-                                    .print("ART start date: ," + patient.getArtDate().format(CustomFormatter.formatter));
+                                    .print("ART start date: " + patient.getArtDate().format(CustomFormatter.formatter));
                         System.out.println(" Date of birth: " + patient.getDob().format(CustomFormatter.formatter));
                         System.out.println("Iso code: " + patient.getISOCode());
                         Integer lSpan= patientController.getLifeSpan(patient.getEmail());
@@ -121,37 +121,37 @@ public class PatientView extends UserView {
                         }
 
                 }
-                case "3" -> {
-                    System.out.println("Update Password");
-                    String password = "";
-                    System.out.println("--------------------------------");
+                // case "3" -> {
+                //     System.out.println("Update Password");
+                //     String password = "";
+                //     System.out.println("--------------------------------");
 
-                    String pass = vops.checkPasswordValidity(patient.getEmail(), pDisplay,
-                            authenticationController::login);
-                    if (pass == null)
-                        continue outerloop;
-                    vout = vops.performCheck(
-                            "Enter new password ",
-                            Messages.invalidPassword,
-                            authenticationController::passwordValid, true, pDisplay);
-                    if (!vout.isValid())
-                        continue outerloop;
-                    password = vout.getInput();
+                //     String pass = vops.checkPasswordValidity(patient.getEmail(), pDisplay,
+                //             authenticationController::login);
+                //     if (pass == null)
+                //         continue outerloop;
+                //     vout = vops.performCheck(
+                //             "Enter new password ",
+                //             Messages.invalidPassword,
+                //             authenticationController::passwordValid, true, pDisplay);
+                //     if (!vout.isValid())
+                //         continue outerloop;
+                //     password = vout.getInput();
 
-                    if (!vops.checkPassConfirmation(password, pDisplay))
-                        continue outerloop;
+                //     if (!vops.checkPassConfirmation(password, pDisplay))
+                //         continue outerloop;
 
-                    if (!patientController.updatePassword(patient.getEmail(), password)) {
-                        System.out.println("Unable to update password");
-                    } else {
-                        System.out.println("Password updated successfully");
-                    }
+                //     if (!patientController.updatePassword(patient.getEmail(), password)) {
+                //         System.out.println("Unable to update password");
+                //     } else {
+                //         System.out.println("Password updated successfully");
+                //     }
 
-                }
-                case "4" -> {
+                // }
+                 case "3" -> {
                     break outerloop;
                 }
-                case "5" -> {
+                case "4" -> {
                     System.exit(0);
                 }
             }

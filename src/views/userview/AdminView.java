@@ -25,8 +25,8 @@ public class AdminView extends UserView {
                      1. Initiate a registration\s
                      2. Export user files \s
                      3. Get analytical information \s
-                     4. go back\s
-                     5. exit\n""");
+                     4. Go Back\s
+                     5. Exit\n""");
                 if(op==null) break;
                 else if (op.equals("1")) {
                 vout = vops.performCheck("Enter email","Invalid email. Enter again or * to go back",
@@ -54,7 +54,7 @@ public class AdminView extends UserView {
                     System.out.println("Unable to export file");
                     continue;
                 }
-                System.out.println("file exported to: "+ fPath);
+                System.out.println("File exported to: "+ fPath);
             }
             else if(op.equals("3")){
                 String fPath= adminController.exportAnalytics();
@@ -62,7 +62,7 @@ public class AdminView extends UserView {
                     System.out.println("Unable to export file");
                     continue;
                 }
-                System.out.println("file exported to: "+ fPath);
+                System.out.println("File exported to: "+ fPath);
             }
             else if (op.equals("4")) {
                 break;
