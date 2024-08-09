@@ -33,7 +33,9 @@ public class PatientView extends UserView {
         outerloop: while (true) {
             System.out.println("Hello " + patient.getfName() + "\n");
             String op = pDisplay.getText(
-                    " 1. View profile info \n 2. Update profile \n 3.Update password \n 4. go back \n 5. exit");
+
+                    " 1. View profile info \n 2. Update profile \n 3. Update password \n 4. go back \n 5. exit");
+
             if(op==null ) break;
             switch (op) {
                 case "1" -> {
@@ -48,14 +50,19 @@ public class PatientView extends UserView {
                                 "Diagnosis date: " + diagDate + " , " + "taking ART: " + patient.isTakingART());
                         if (patient.isTakingART())
                             System.out
-                                    .print("ART start date: " + patient.getArtDate().format(CustomFormatter.formatter));
+
+                                    .print("ART start date: ," + patient.getArtDate().format(CustomFormatter.formatter));
                         System.out.println(" Date of birth: " + patient.getDob().format(CustomFormatter.formatter));
                         System.out.println("Iso code: " + patient.getISOCode());
-                        System.out.println("\nHealth prediction information: \n\n");
+                        Integer lSpan= patientController.getLifeSpan(patient.getISOCode());
+                        if(lSpan!=null){
+                            System.out.println("\nHealth prediction information: \n\n");
+                            System.out.println("Years to live: " + patientController.getLifeSpan(patient.getISOCode()) );
+                        }
+                        else{
+                            System.out.println("Error in fetching health information");
+                        }
 
-                        // System.out.println("Date of Demise: "+ exp.getDate()
-                        // );
-                        // System.out.println("Years to live: " + exp.getRemYears()+ "\n\n");
                         System.out.println("--------------------------------\n\n");
 
                     }

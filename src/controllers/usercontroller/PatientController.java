@@ -1,4 +1,8 @@
 package controllers.usercontroller;
+
+import java.io.IOException;
+
+
 import constants.Role;
 import dataprovider.userprovider.PatientProvider;
 import models.intermediate.UpdateData;
@@ -12,9 +16,14 @@ public class PatientController implements ValidationInterface {
     this.patientProvider = patientProvider;
   }
 
-  public int getLifeSpan(String isoCode) {
-    return patientProvider.getLifeSpan(isoCode);
-  }
+  public Integer getLifeSpan(String isoCode) {
+    try {
+      return patientProvider.getLifeSpan(isoCode);
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    }
+
 
   public boolean updateProfile(Patient initPatient,UpdateData udata){
       try{
