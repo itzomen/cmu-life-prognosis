@@ -25,7 +25,7 @@ public class PatientController implements ValidationInterface {
     }
   }
 
-
+  }
   public boolean updateProfile(Patient initPatient,UpdateData udata){
       try{
         patientProvider.updateProfile(new Patient(udata.getfName(), udata.getlName(), initPatient.getEmail(), udata.getDob(),
