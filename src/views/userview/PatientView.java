@@ -134,7 +134,7 @@ public class PatientView extends UserView {
                     if (!vops.checkPassConfirmation(password, pDisplay))
                         continue outerloop;
 
-                    if (patientController.updatePassword(patient.getEmail(), password)) {
+                    if (!patientController.updatePassword(patient.getEmail(), password)) {
                         System.out.println("Unable to update password");
                     } else {
                         System.out.println("Password updated successfully");
