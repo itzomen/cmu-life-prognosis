@@ -1,5 +1,7 @@
 package controllers.usercontroller;
+
 import java.io.IOException;
+
 
 import constants.Role;
 import dataprovider.userprovider.PatientProvider;
@@ -21,7 +23,7 @@ public class PatientController implements ValidationInterface {
       e.printStackTrace();
       return null;
     }
-  }
+
 
   public boolean updateProfile(Patient initPatient,UpdateData udata){
       try{
