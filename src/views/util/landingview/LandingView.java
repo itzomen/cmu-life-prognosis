@@ -112,7 +112,9 @@ public class LandingView {
 
             else if (s.equals("2")) {
                 String email = pDisplay.getText("Enter email or * to go back");
+                if(email==null) break;
                 String password = pDisplay.getPassword("Enter password");
+                if(password==null) break; 
                 System.out.println("Log in in progress");
                 User user = authenticationController.login(email, password);
                 if (user == null) {

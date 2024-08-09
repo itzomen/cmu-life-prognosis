@@ -43,4 +43,5 @@ The fields are as follows:
 - No passing the password through the provider, do authentication immediately.
 - Change date format for saving to the data store.
 - Modularize the register feature to be used on the Update profile feature 
-
+- check for * entry in the password confirmation field
+- login and back feature completion
