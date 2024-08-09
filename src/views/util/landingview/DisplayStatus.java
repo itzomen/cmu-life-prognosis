@@ -3,6 +3,7 @@ package views.util.landingview;
 import java.time.LocalDate;
 
 import controllers.usercontroller.AuthenticationController;
+import models.user.Patient;
 import views.util.displayutil.PromptDisplay;
 import views.util.validviewutil.ValidConcreteOperation;
 
@@ -10,12 +11,14 @@ public class DisplayStatus {
   PromptDisplay pDisplay;
   AuthenticationController authenticationController;
   ValidConcreteOperation vops;
+  Patient patient;
 
   public DisplayStatus(PromptDisplay promptDisplay, AuthenticationController authenticationController,
-      ValidConcreteOperation vops) {
+      ValidConcreteOperation vops, Patient patient) {
     this.pDisplay = promptDisplay;
     this.authenticationController = authenticationController;
     this.vops = vops;
+    this.patient=patient;
   }
 
   public HivStatus getStatusInfo(LocalDate dob) {
@@ -34,8 +37,14 @@ public class DisplayStatus {
       else if (st.equals("1") || st.equals("2")) {
         if (st.equals("1")) {
           hivStatus = true;
-          diagDate = vops.performDateRangeCheck("when is your diagnosis date mm/dd/yyyy",
-              "Invalid date. Enter again or * to go back",
+          String pMessage= "when is your diagnosis date mm/dd/yyyy";
+          String errMessage="Invalid date. Enter again or * to go back";
+          diagDate = patient!=null?  
+          vops.performDateRangeWithEmpty(pMessage,
+              errMessage,
+              authenticationController::dateValidWithEmpty, pDisplay, dob, patient.getDiagnsisDate())
+          :vops.performDateRangeCheck(pMessage,
+              errMessage,
               authenticationController::dateValid, pDisplay, dob);
           if (diagDate == null)
             continue;
@@ -46,13 +55,20 @@ public class DisplayStatus {
           } else if (art.equals("1") || art.equals("2")) {
             if (art.equals("1")) {
               takingART = true;
-              artDate = vops.performDateRangeCheck("Enter date of start for the treatment", "invalid date",
+              pMessage="Enter date of start for the treatment";
+
+              artDate = patient!=null? 
+              vops.performDateRangeWithEmpty(pMessage,
+              errMessage,
+              authenticationController::dateValidWithEmpty, pDisplay, diagDate, patient.getArtDate())
+              :vops.performDateRangeCheck(pMessage, errMessage,
                   authenticationController::dateValid, pDisplay, diagDate);
               if (artDate == null)
                 continue;
             }
           } else {
             System.out.println("Invalid option try again or * to go back");
+            continue;
           }
         }
         stCheck=true;

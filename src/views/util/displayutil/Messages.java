@@ -7,7 +7,10 @@ public class Messages{
     "   UUID and email should be in a valid format \n" +
             "   Use * to go back to previous options \n" +
             "use ^ to exit the program \n" +
-    "   Use exit options to stop the program \n"
+    "   Use exit options to stop the program \n" +
+    "   Date format is MM/dd/yyyy \n" +
+    "   "
     );
   }
+  public static String invalidPassword="\"Invalid password(length: 8, numbers, uppercase and lowercase letters). Enter again or * to go back\"";
 }

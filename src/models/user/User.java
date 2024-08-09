@@ -29,6 +29,10 @@ abstract public class User{
         return role;
     }
 
+    public String toString() {
+        return "Fname: "+ fName + "Lname: "+ lName + "email: "+ email;
+    }
+
 
 
 }
