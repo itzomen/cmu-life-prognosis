@@ -3,8 +3,6 @@ package dataprovider.userprovider;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 import models.user.Patient;
 import views.util.formatter.CustomFormatter;
@@ -12,26 +10,28 @@ import views.util.formatter.CustomFormatter;
 public class PatientProvider {
 
 
-  // isoCode is 2 alpha code
   public int getLifeSpan(String email) throws IOException {
-    int lifespan = 0; // Default lifespan initialization
+    // Prepare the ProcessBuilder with the necessary arguments
+    ProcessBuilder pb = new ProcessBuilder("scripts/life-expectancy.sh", email);
 
-    ProcessBuilder pb = new ProcessBuilder("bash", "-c",
-        "../scripts/lifeExpectancy.sh ../user-store.txt ../life-expectancy.csv");
-    Map<String, String> env = pb.environment();
-    env.put("patientEmail", email);
+    // Start the process and capture the output
+    Process process = pb.start();
 
-    Process p = pb.start();
-
-    // Reading output from the process
-    BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-    String output = reader.lines().collect(Collectors.joining("\n"));
-    System.out.println("fetched data: "+ output);
-    lifespan = Integer.parseInt(output); // Correctly convert string to integer
-
-    System.out.println(lifespan);
-    return lifespan;
-  }
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+        String line;
+        if ((line = reader.readLine()) != null) {
+            try {
+                // Parse the output as an integer representing the lifespan
+                int lifespan = Integer.parseInt(line.trim());
+                return lifespan;
+            } catch (NumberFormatException e) {
+                throw new IOException("Invalid lifespan output: " + line, e);
+            }
+        } else {
+            throw new IOException("No output from lifespan script");
+        }
+    }
+}
 
   public void updateProfile(Patient patient) throws IOException, InterruptedException {
     // Prepare the ProcessBuilder with the necessary arguments
@@ -55,8 +55,7 @@ public class PatientProvider {
         throw new RuntimeException("Failed to update profile. Exit code: " + exitCode);
     }
 
-  
-}
+    }
 
 
   public void updatePassword(String email, String newPassword) {
@@ -66,6 +65,6 @@ public class PatientProvider {
     throw new RuntimeException("test exception");
   }
 
-    }
+}
 
     
