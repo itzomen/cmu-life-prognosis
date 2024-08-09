@@ -23,6 +23,7 @@ public class PatientController implements ValidationInterface {
       e.printStackTrace();
       return null;
     }
+  }
 
   }
   public boolean updateProfile(Patient initPatient,UpdateData udata){
@@ -45,7 +46,5 @@ public class PatientController implements ValidationInterface {
        return false; 
      }
   }
-
-
 
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import models.user.Patient;
+import views.util.formatter.CustomFormatter;
 
 public class PatientProvider {
 
@@ -32,12 +33,30 @@ public class PatientProvider {
     return lifespan;
   }
 
-  public void updateProfile(Patient patient) {
-    // update all the data for patient.email
+  public void updateProfile(Patient patient) throws IOException, InterruptedException {
+    // Prepare the ProcessBuilder with the necessary arguments
+    String dob = patient.getDob().format(CustomFormatter.formatter);
+    String diagnosisDate = patient.getDiagnsisDate() != null ? patient.getDiagnsisDate().format(CustomFormatter.formatter) : "";
+    String artDate = patient.getArtDate() != null ? patient.getArtDate().format(CustomFormatter.formatter) : "";
 
-    throw new RuntimeException("test exception");
+    ProcessBuilder pb = new ProcessBuilder("scripts/update_user.sh",
+            patient.getEmail(), patient.getfName(), patient.getlName(),
+            dob, patient.getISOCode(), String.valueOf(patient.isHIVStatus()),
+            diagnosisDate, String.valueOf(patient.isTakingART()), artDate);
 
-  }
+    // Start the process and wait for its completion
+    Process process = pb.start();
+    int exitCode = process.waitFor();
+
+    // Check the exit code to handle errors
+    if (exitCode == 8) {
+         throw new RuntimeException("Email Not Found");
+    } else if (exitCode != 0) {
+        throw new RuntimeException("Failed to update profile. Exit code: " + exitCode);
+    }
+
+  
+}
 
 
   public void updatePassword(String email, String newPassword) {
