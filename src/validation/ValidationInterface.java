@@ -24,15 +24,23 @@ public interface ValidationInterface {
         return ISO.getIsoCountries().contains(iso);
     }
 
+    default boolean isoValidWithEmpty(String iso){
+        return ISO.getIsoCountries().contains(iso) || iso.isEmpty();
+    }
+
     default boolean fNameValid(String fName){
         return fName.matches("^[A-Za-z_-]+$");
     }
 
+    default boolean fNameValidWithEmpty(String fName){
+        return fName.matches("^[A-Za-z_-]+$") || fName.isEmpty();
+    }
 
     default boolean passwordValid(String password){
         return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{8,}$"
         );
     }
+    
 
     default LocalDate dateValid(String date){
       
@@ -44,6 +52,17 @@ public interface ValidationInterface {
            return null;
         }
 
+    }
+
+    default LocalDate dateValidWithEmpty(String date, LocalDate initDate){
+        try{
+            LocalDate localDate = LocalDate.parse(date,CustomFormatter.formatter);
+            return localDate;    
+        }
+        catch(DateTimeParseException e){
+           if(date.isEmpty()) return initDate; 
+           return null;
+        }
     }
     default boolean beforeNow(LocalDate date){
         LocalDate nowDate= LocalDate.now();
@@ -57,4 +76,5 @@ public interface ValidationInterface {
         }
         return false;
     }
+
 }

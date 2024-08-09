@@ -14,7 +14,6 @@ public class AdminView extends UserView {
         this.adminController = adminController;
     }
 
-
     @Override
     public void start() {
         ValidConcreteOperation vops = new ValidConcreteOperation();
@@ -28,7 +27,8 @@ public class AdminView extends UserView {
                      3. Get analytical information \s
                      4. go back\s
                      5. exit\n""");
-            if (op.equals("1")) {
+                if(op==null) break;
+                else if (op.equals("1")) {
                 vout = vops.performCheck("Enter email","Invalid email. Enter again or * to go back",
                         adminController::emailValid, false, pDisplay
                 );

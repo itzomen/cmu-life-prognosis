@@ -3,6 +3,7 @@ package models.user;
 import java.time.LocalDate;
 
 import constants.Role;
+import views.util.formatter.CustomFormatter;
 
 public class Patient extends User{
     private LocalDate dob;
@@ -63,7 +64,9 @@ public class Patient extends User{
 
     public String toString() {
         String shared= super.toString();
-        return shared + "dob: "+ dob.toString() + "hivStatus"+ this.HIVStatus+ "diagnosis date: "+ 
-        this.diagnsisDate.toString() + "ART: "+ String.valueOf(takingART) + artDate.toString() + ISOCode ;
+        return shared + "dob: "+ dob.format(CustomFormatter.formatter) + 
+        "hivStatus"+ this.HIVStatus+ "diagnosis date: "+ 
+        diagnsisDate.format(CustomFormatter.formatter) + "ART: "+ String.valueOf(takingART) + 
+        artDate.format(CustomFormatter.formatter) + ISOCode ;
     }
 }

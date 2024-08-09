@@ -45,7 +45,6 @@ public class AuthenticationProvider {
                      takArt, artDate, userDetails[7],
                     Role.PATIENT
                     );
-                    System.out.println(user.toString());
                 }
                 return user;
             }
@@ -56,9 +55,9 @@ public class AuthenticationProvider {
     public void register(RegisterData rdata) throws IOException, InterruptedException {
 
         
-        String dob = rdata.getDob().toString();
-        String diagnosisDate = rdata.getDiagnosisDate() != null ? rdata.getDiagnosisDate().toString() : "";
-        String artDate = rdata.getArtDate() != null ? rdata.getArtDate().toString() : "";
+        String dob = rdata.getDob().format(CustomFormatter.formatter);
+        String diagnosisDate = rdata.getDiagnosisDate() != null ? rdata.getDiagnosisDate().format(CustomFormatter.formatter) : "";
+        String artDate = rdata.getArtDate() != null ? rdata.getArtDate().format(CustomFormatter.formatter) : "";
         ProcessBuilder pb = new ProcessBuilder("scripts/register_user.sh",
                 rdata.getUuid(), rdata.getPassword(), rdata.getfName(), rdata.getlName(),
                 dob, rdata.getIsoCode(), String.valueOf(rdata.isHivStatus()),

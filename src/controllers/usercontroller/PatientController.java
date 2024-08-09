@@ -16,9 +16,9 @@ public class PatientController implements ValidationInterface {
     return patientProvider.getLifeSpan(isoCode);
   }
 
-  public boolean updateProfile(String email,UpdateData udata){
+  public boolean updateProfile(Patient initPatient,UpdateData udata){
       try{
-        patientProvider.updateProfile(new Patient(udata.getfName(), udata.getlName(), email, udata.getDob(),
+        patientProvider.updateProfile(new Patient(udata.getfName(), udata.getlName(), initPatient.getEmail(), udata.getDob(),
          udata.ishIVStatus(), udata.getDiagnsisDate(), udata.isTakingART(), 
          udata.getArtDate(), udata.getiSOCode(), Role.PATIENT));
          return true;
@@ -26,6 +26,15 @@ public class PatientController implements ValidationInterface {
       catch(Exception e){
          return false;
       }
+  }
+
+  public boolean updatePassword(String email, String password){
+     try {
+       patientProvider.updatePassword(email, password);
+       return true;
+     } catch (Exception e) {
+       return false; 
+     }
   }
 
 
