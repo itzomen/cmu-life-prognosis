@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Export patients script
@@ -16,3 +15,5 @@ while IFS=: read -r uuid email role password fn ln dob country hiv diagnosis_dat
     echo "$uuid,$email,$role,$password,$fn,$ln,$dob,$country,$hiv,$diagnosis_date,$art,$art_date" >> $OUTPUT_FILE
   fi
 done < user-store.txt
+
+echo "Exported patient data to $OUTPUT_FILE"
