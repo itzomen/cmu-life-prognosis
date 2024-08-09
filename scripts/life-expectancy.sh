@@ -13,7 +13,7 @@ compute_remaining_lifespan() {
     local art_start_year=$6
 
     local life_expectancy=$(awk -F ',' -v iso="$country_iso" '$4 == iso {print $7}' "$life_expectancy_csv")
-    echo "Debug: life_expectancy=$life_expectancy"
+    # echo "Debug: life_expectancy=$life_expectancy"
 
     if [[ "$hiv_positive" == "true" ]]; then
         local diagnosis_year=$(echo "$diagnosis_date" | cut -d '/' -f3)
@@ -52,12 +52,11 @@ while IFS=: read -r uuid user_email role hashed_password first_name last_name do
         birth_year=$(echo $dob | cut -d '/' -f3)
         age=$(($current_year - $birth_year))
 
-        echo "Debug: age=$age"
+        # echo "Debug: age=$age"
 
         # Compute remaining lifespan
         remaining_lifespan=$(compute_remaining_lifespan "$iso" "$age" "$hiv" "$diagnosis_date" "$art" "$art_date")
         echo $remaining_lifespan
-        echo "Remaining lifespan for $first_name $last_name is $remaining_lifespan years"
         exit 0
     fi
 done < "$user_store"

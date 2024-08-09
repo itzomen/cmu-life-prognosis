@@ -54,10 +54,10 @@ public class PatientView extends UserView {
                                     .print("ART start date: ," + patient.getArtDate().format(CustomFormatter.formatter));
                         System.out.println(" Date of birth: " + patient.getDob().format(CustomFormatter.formatter));
                         System.out.println("Iso code: " + patient.getISOCode());
-                        Integer lSpan= patientController.getLifeSpan(patient.getISOCode());
+                        Integer lSpan= patientController.getLifeSpan(patient.getEmail());
                         if(lSpan!=null){
                             System.out.println("\nHealth prediction information: \n\n");
-                            System.out.println("Years to live: " + patientController.getLifeSpan(patient.getISOCode()) );
+                            System.out.println("Years to live: " + lSpan);
                         }
                         else{
                             System.out.println("Error in fetching health information");
