@@ -2,7 +2,7 @@ package views.util.displayutil;
 
 import java.io.Console;
 import java.util.Scanner;
-
+// this class is used to handle the interaction with the user input
 public class PromptDisplay {
 Scanner scanner;
 Console console;  

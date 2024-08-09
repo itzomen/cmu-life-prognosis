@@ -16,9 +16,9 @@ public class PatientController implements ValidationInterface {
     this.patientProvider = patientProvider;
   }
 
-  public Integer getLifeSpan(String isoCode) {
+  public Integer getLifeSpan(String email) {
     try {
-      return patientProvider.getLifeSpan(isoCode);
+      return patientProvider.getLifeSpan(email);
     } catch (IOException e) {
       e.printStackTrace();
       return null;
