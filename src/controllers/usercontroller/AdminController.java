@@ -2,15 +2,21 @@
 package controllers.usercontroller;
 
 import dataprovider.userprovider.AdminProvider;
+import models.intermediate.ValidationOutput;
 import validation.ValidationInterface;
+import views.util.exceptions.DuplicateEmail;
 
 public class AdminController implements ValidationInterface {
     final AdminProvider adminProvider;
     public AdminController(AdminProvider adminProvider) {this.adminProvider=adminProvider;}
 
-    public String initiateRegistration(String email){
+    public ValidationOutput initiateRegistration(String email){
         try{
-            return adminProvider.initiateRegistration(email);
+            String uuid= adminProvider.initiateRegistration(email);
+            return new ValidationOutput(uuid, true);
+        }
+        catch(DuplicateEmail e){
+            return new ValidationOutput("", false);
         }
         catch (Exception e){
             return null;

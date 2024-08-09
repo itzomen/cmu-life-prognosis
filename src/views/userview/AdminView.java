@@ -35,21 +35,26 @@ public class AdminView extends UserView {
                 if (!vout.isValid()) continue;
                 String email= vout.getInput();
                 System.out.println("generating a UUID");
-                String uuid = adminController.initiateRegistration(email);
-                if (uuid == null) {
+                ValidationOutput uuidOut= adminController.initiateRegistration(email); 
+                
+                if (uuidOut == null) {
                     System.out.println("error generating uuid");
-                    continue;
+                
                 }
-                System.out.println("uuid is: " + uuid);
+                else if(!uuidOut.isValid()){
+                    System.out.println("Duplicate email registration");
+                }
+                else{
+                    String uuid= uuidOut.getInput();
+                    System.out.println("uuid is: " + uuid);
+                } 
             }else if(op.equals("2")) {
                 String fPath= adminController.exportPatientsInfo();
                 if(fPath == null) {
                     System.out.println("Unable to export file");
                     continue;
                 }
-
                 System.out.println("file exported to: "+ fPath);
-
             }
             else if(op.equals("3")){
                 String fPath= adminController.exportAnalytics();
@@ -57,9 +62,7 @@ public class AdminView extends UserView {
                     System.out.println("Unable to export file");
                     continue;
                 }
-
                 System.out.println("file exported to: "+ fPath);
-
             }
             else if (op.equals("4")) {
                 break;
