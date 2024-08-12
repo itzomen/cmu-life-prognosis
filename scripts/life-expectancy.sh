@@ -1,8 +1,14 @@
 #!/bin/bash
-
-# Path to the CSV file
+patientEmail=$1
 life_expectancy_csv="life-expectancy.csv"
-user_store="user-store.txt"
+current=$(date +%Y)
+
+
+calculate_age() {
+    local dob=$1
+    local birth_year=$(echo $dob | cut -d '/' -f3)
+    echo $((current - birth_year))
+}
 
 compute_remaining_lifespan() {
     local country_iso=$1
@@ -13,53 +19,50 @@ compute_remaining_lifespan() {
     local art_start_year=$6
 
     local life_expectancy=$(awk -F ',' -v iso="$country_iso" '$4 == iso {print $7}' "$life_expectancy_csv")
-    # echo "Debug: life_expectancy=$life_expectancy"
 
     if [[ "$hiv_positive" == "true" ]]; then
-        local diagnosis_year=$(echo "$diagnosis_date" | cut -d '/' -f3)
+        local diagnosis_year=$(echo $diagnosis_date | cut -d '/' -f3)
         local delay_years=0
         if [[ "$art_start_status" == "true" ]]; then
             if [[ "$art_start_year" != "false" && -n "$art_start_year" ]]; then
-                local art_year=$(echo "$art_start_year" | cut -d '/' -f3)
+                local art_year=$(echo $art_start_year | cut -d '/' -f3)
                 delay_years=$(($art_year - $diagnosis_year))
             fi
-            local remaining_years=$(echo "$life_expectancy - $age" | bc)
-            local life_with_art=$(echo "scale=2; $remaining_years * 0.9 * (0.9^$delay_years)" | bc)
-            local rounded_life=$(echo "$life_with_art" | awk '{print int($1+0.5)}')
-            echo $rounded_life
-        else
-            local remaining_years=$(echo "$life_expectancy - $age" | bc)
-            local reduced_life=$(echo "scale=2; $remaining_years - 5" | bc)
-            local rounded_life=$(echo "$reduced_life" | awk '{print int($1+0.5)}')
-            if [ "$rounded_life" -lt 0 ]; then
-                rounded_life=0
+            if [ -n "$life_expectancy" ]; then
+                local reduced_life=$(echo "($life_expectancy - $age) * 0.9 * (0.9^$delay_years)" | bc)
+                local rounded_life=$(echo "$reduced_life" | awk '{print int($1+0.5)}')
+                echo $rounded_life
+            else
+                echo "Life expectancy not found for ISO: $country_iso"
             fi
-            echo $rounded_life
+        else
+            
+            local reduced_life=$(echo "($diagnosis_year + 5 - $current)" |bc)
+            local rounded_life=$(echo "$reduced_life" | awk '{print int($1+0.5)}')
+            if (("$rounded_life" >= "0")); then
+                echo $rounded_life
+            else 
+                rounded_life=0
+                echo $rounded_life
+            fi
         fi
     else
-        local remaining_years=$(echo "$life_expectancy - $age" | bc)
-        local rounded_life=$(echo "$remaining_years" | awk '{print int($1+0.5)}')
+        local reduced_life=$(echo "($life_expectancy - $age)" |bc)
+        local rounded_life=$(echo "$reduced_life" | awk '{print int($1+0.5)}')
         echo $rounded_life
+        
     fi
+
+
 }
 
-# Read user data from user-store.txt
-email=$1
-while IFS=: read -r uuid user_email role hashed_password first_name last_name dob iso hiv diagnosis_date art art_date; do
-    if [[ "$user_email" == "$email" ]]; then
-        # Calculate age from DOB
-        current_year=$(date +%Y)
-        birth_year=$(echo $dob | cut -d '/' -f3)
-        age=$(($current_year - $birth_year))
-
-        # echo "Debug: age=$age"
-
-        # Compute remaining lifespan
-        remaining_lifespan=$(compute_remaining_lifespan "$iso" "$age" "$hiv" "$diagnosis_date" "$art" "$art_date")
+while IFS=':' read uuid email role hash first_name last_name dob country_iso hiv diagnosis_date art_status art_start_year extra
+do
+    if [[ "$role" == "patient" && "$patientEmail" == "$email" ]]; then
+        age=$(calculate_age $dob)
+        remaining_lifespan=$(compute_remaining_lifespan $country_iso $age $hiv $diagnosis_date $art_status $art_start_year)     
         echo $remaining_lifespan
-        exit 0
     fi
-done < "$user_store"
 
-echo "User not found"
-exit 1
+done < "user-store.txt"
+

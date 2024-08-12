@@ -12,7 +12,7 @@ echo "UUID,Email,Role,Password,First Name,Last Name,Date of Birth,Country,HIV St
 while IFS=: read -r uuid email role password fn ln dob country hiv diagnosis_date art art_date; do
   # Only include patients in the CSV file
   if [ "$role" == "patient" ]; then
-    echo "$uuid,$email,$role,$password,$fn,$ln,$dob,$country,$hiv,$diagnosis_date,$art,$art_date" >> $OUTPUT_FILE
+    echo "$uuid,$email,$role,$fn,$ln,$dob,$country,$hiv,$diagnosis_date,$art,$art_date" >> $OUTPUT_FILE
   fi
 done < user-store.txt
 

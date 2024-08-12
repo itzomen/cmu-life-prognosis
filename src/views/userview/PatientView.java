@@ -5,7 +5,6 @@ import controllers.usercontroller.PatientController;
 import models.intermediate.UpdateData;
 import models.intermediate.ValidationOutput;
 import models.user.Patient;
-import views.util.displayutil.Messages;
 import views.util.displayutil.PromptDisplay;
 import views.util.formatter.CustomFormatter;
 import views.util.landingview.DisplayStatus;

@@ -45,3 +45,4 @@ The fields are as follows:
 - Modularize the register feature to be used on the Update profile feature 
 - check for * entry in the password confirmation field
 - login and back feature completion
+- MAKE SURE TO INSTALL BC IN WSL------->
