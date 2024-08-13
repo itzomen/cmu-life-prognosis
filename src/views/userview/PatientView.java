@@ -9,6 +9,7 @@ import views.util.displayutil.PromptDisplay;
 import views.util.formatter.CustomFormatter;
 import views.util.landingview.DisplayStatus;
 import views.util.landingview.HivStatus;
+import views.util.landingview.LandingView;
 import views.util.validviewutil.ValidConcreteOperation;
 
 import java.time.LocalDate;
@@ -25,48 +26,52 @@ public class PatientView extends UserView {
     }
 
     public void start() {
-        Patient patient = (Patient) user;
         ValidConcreteOperation vops = new ValidConcreteOperation();
         ValidationOutput vout;
-        DisplayStatus displayStatus = new DisplayStatus(pDisplay, authenticationController, vops, patient);
+        DisplayStatus displayStatus = new DisplayStatus(pDisplay, authenticationController, vops, (Patient) user);
         outerloop: while (true) {
-            System.out.println("Hello " + patient.getfName() + "\n");
+            if(LandingView.removingScreens) break;
+            System.out.println("Hello " + user.getfName() + "\n");
             String op = pDisplay.getText(
 
                     " 1. View profile info \n 2. Update profile \n 3. Go Back \n 4. Exit");
 
-            if(op==null ) break;
+            if(op==null || LandingView.removingScreens) break;
             switch (op) {
                 case "1" -> {
+                    Patient p= (Patient) user;
                     System.out.println("--------------------------------");
                     System.out
-                            .println("First name: " + patient.getfName() + " , " + "Last name: " + patient.getlName());
-                    String hivMess = patient.isHIVStatus() ? "positive" : "negative";
-                    System.out.println("Email: " + patient.getEmail() + " , " + "Hiv status: " + hivMess);
-                    if (patient.isHIVStatus()) {
-                        String diagDate = patient.getDiagnsisDate().format(CustomFormatter.formatter);
+                            .println("First name: " + p.getfName() + " , " + "Last name: " + p.getlName());
+                    String hivMess = p.isHIVStatus() ? "positive" : "negative";
+                    System.out.println("Email: " + p.getEmail() + " , " + "Hiv status: " + hivMess);
+                    if (p.isHIVStatus()) {
+                        String diagDate = p.getDiagnsisDate().format(CustomFormatter.formatter);
                         System.out.println(
-                                "Diagnosis date: " + diagDate + " , " + "taking ART: " + patient.isTakingART());
-                        if (patient.isTakingART())
+                                "Diagnosis date: " + diagDate + " , " + "taking ART: " + p.isTakingART());
+                        if (p.isTakingART())
                             System.out
 
-                                    .print("ART start date: " + patient.getArtDate().format(CustomFormatter.formatter));
-                        System.out.println(" Date of birth: " + patient.getDob().format(CustomFormatter.formatter));
-                        System.out.println("Iso code: " + patient.getISOCode());
-                        Integer lSpan= patientController.getLifeSpan(patient.getEmail());
-                        if(lSpan!=null){
-                            System.out.println("\nHealth prediction information: \n\n");
-                            System.out.println("Years to live: " + lSpan);
-                        }
-                        else{
-                            System.out.println("Error in fetching health information");
-                        }
+                                    .print("ART start date: " + p.getArtDate().format(CustomFormatter.formatter));
+                        System.out.println(" Date of birth: " + p.getDob().format(CustomFormatter.formatter));
+                        System.out.println("Iso code: " + p.getISOCode());
+                       
 
-                        System.out.println("--------------------------------\n\n");
+                        
 
                     }
+                    Integer lSpan= patientController.getLifeSpan(p.getEmail());
+                    if(lSpan!=null){
+                        System.out.println("\nHealth prediction information: \n\n");
+                        System.out.println("Years to live: " + lSpan);
+                    }
+                    else{
+                        System.out.println("Error in fetching health information");
+                    }
+                    System.out.println("--------------------------------\n\n");
                 }
                 case "2" -> {
+                    Patient p= (Patient) user;
                     System.out.println("Update profile information or leave empty for the default values");
                     System.out.println("--------------------------------");
                     vout = vops.performCheck("Update First Name, leave empty or *",
@@ -74,18 +79,18 @@ public class PatientView extends UserView {
                             authenticationController::fNameValidWithEmpty, false, pDisplay);
                     if (!vout.isValid())
                         continue;
-                    String newFname = vout.getInput().isEmpty() ? patient.getfName() : vout.getInput();
+                    String newFname = vout.getInput().isEmpty() ? p.getfName() : vout.getInput();
 
                     vout = vops.performCheck("Update last Name, leave empty or *",
                             "Invalid Name: name shouldn't contain a number. Enter again or * to go back",
                             authenticationController::fNameValidWithEmpty, false, pDisplay);
                     if (!vout.isValid())
                         continue;
-                    String newLname = vout.getInput().isEmpty() ? patient.getfName() : vout.getInput();
+                    String newLname = vout.getInput().isEmpty() ? p.getlName() : vout.getInput();
 
                     LocalDate newDob = vops.performDateCheckWithEmpty("Update DOB mm/dd/yyyy",
                             "Invalid DOB. Enter again or * to go back",
-                            authenticationController::dateValidWithEmpty, pDisplay, patient.getDob());
+                            authenticationController::dateValidWithEmpty, pDisplay, p.getDob());
                     if (newDob == null)
                         continue;
 
@@ -94,9 +99,10 @@ public class PatientView extends UserView {
                             authenticationController::isoValidWithEmpty, false, pDisplay);
                     if (!vout.isValid())
                         continue;
-                    String newIsoCode = vout.getInput().isEmpty() ? patient.getISOCode() : vout.getInput();
+                    String newIsoCode = vout.getInput().isEmpty() ? p.getISOCode() : vout.getInput();
 
-                    HivStatus hstat = displayStatus.getStatusInfo(newDob);
+                    HivStatus hstat = displayStatus.getStatusInfo(newDob,false);
+
                     LocalDate newDiagDate = hstat.getDiagDate();
                     LocalDate newArtDate = hstat.getArtDate();
                     String newDiagString= newDiagDate!=null ? newDiagDate.format(CustomFormatter.formatter) : "";
@@ -112,11 +118,13 @@ public class PatientView extends UserView {
                         + newHivStatus + " " + isTakingART + " " + newDob.format(CustomFormatter.formatter) + " " + 
                         newDiagString + " " + newArtString
                         );
-                        if(patientController.updateProfile(patient, newData)){
+                        if(patientController.updateProfile(p, newData)){
+                            this.user= new Patient(newFname, newLname, p.getEmail(), 
+                            newDob, newHivStatus, newDiagDate, isTakingART, newArtDate, newIsoCode, p.getRole());
                             System.out.println("Profile updated succesfully");
                         }
                         else{
-                            System.out.println("Password updated successfully");
+                            System.out.println("Error in updating profile");
                         }
 
                 }

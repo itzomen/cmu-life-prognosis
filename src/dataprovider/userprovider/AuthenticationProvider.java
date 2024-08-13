@@ -36,9 +36,9 @@ public class AuthenticationProvider {
                 } else {
                     LocalDate dob= userDetails[6].isEmpty() ? null: LocalDate.parse(userDetails[6], CustomFormatter.formatter);
                     boolean isHiv= userDetails[8].isEmpty()? false: Boolean.parseBoolean(userDetails[8]); 
-                    LocalDate diDate= userDetails[9].isEmpty() ? null : LocalDate.parse(userDetails[9], CustomFormatter.formatter);
-                    boolean takArt= userDetails[10].isEmpty() ? false :Boolean.parseBoolean(userDetails[10]);
-                    LocalDate  artDate= userDetails[11].isEmpty() ? null :   LocalDate.parse(userDetails[11], 
+                    LocalDate diDate= !isHiv ? null : LocalDate.parse(userDetails[9], CustomFormatter.formatter);
+                    boolean takArt= diDate==null ? false :Boolean.parseBoolean(userDetails[10]);
+                    LocalDate  artDate= !takArt ? null :   LocalDate.parse(userDetails[11], 
                     CustomFormatter.formatter);
                     
                     user = new Patient(fName,lName, email,dob,isHiv, diDate,

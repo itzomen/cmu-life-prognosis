@@ -30,7 +30,7 @@ compute_remaining_lifespan() {
             fi
             if [ -n "$life_expectancy" ]; then
                 local reduced_life=$(echo "($life_expectancy - $age) * 0.9 * (0.9^$delay_years)" | bc)
-                local rounded_life=$(echo "$reduced_life" | awk '{print int($1+0.5)}')
+                local rounded_life=$(echo "($reduced_life + 0.999999)/1" | bc)
                 echo $rounded_life
             else
                 echo "Life expectancy not found for ISO: $country_iso"
@@ -38,7 +38,7 @@ compute_remaining_lifespan() {
         else
             
             local reduced_life=$(echo "($diagnosis_year + 5 - $current)" |bc)
-            local rounded_life=$(echo "$reduced_life" | awk '{print int($1+0.5)}')
+            local rounded_life=$(echo "($reduced_life + 0.999999)/1" | bc)
             if (("$rounded_life" >= "0")); then
                 echo $rounded_life
             else 
@@ -48,7 +48,7 @@ compute_remaining_lifespan() {
         fi
     else
         local reduced_life=$(echo "($life_expectancy - $age)" |bc)
-        local rounded_life=$(echo "$reduced_life" | awk '{print int($1+0.5)}')
+        local rounded_life=$(echo "($reduced_life + 0.999999)/1" | bc)
         echo $rounded_life
         
     fi

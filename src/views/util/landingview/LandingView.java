@@ -23,6 +23,7 @@ import java.util.Scanner;
 
 public class LandingView {
     final controllers.usercontroller.AuthenticationController authenticationController;
+    public static boolean removingScreens=false;
     PromptDisplay pDisplay = new PromptDisplay(new Scanner(System.in), System.console());
 
     public LandingView(controllers.usercontroller.AuthenticationController authenticationController) {
@@ -36,9 +37,10 @@ public class LandingView {
         while (true) {
 
             // code refactored for better collaboration
-
+            
             String s = pDisplay.getText(" 1. Register \n 2. Login \n 3. Help \n 4. Exit \n ");
-            if(s==null) break;
+            if(LandingView.removingScreens) LandingView.removingScreens=false;
+            if(s==null ) break;
             else if (s.equals("1")) {
 
                 String uuid, fName, lName, isoCode, password;
@@ -72,13 +74,13 @@ public class LandingView {
                 if (dobj == null) 
                     continue;
 
-                HivStatus hstat = displayStatus.getStatusInfo(dobj);
+                HivStatus hstat = displayStatus.getStatusInfo(dobj, true);
                 LocalDate diagDate = hstat.getDiagDate();
                 LocalDate artDate = hstat.getArtDate();
                 hivStatus = hstat.isStatus();
                 takingART = hstat.isTakingART();
                 if (!hstat.isValid())
-                    break;
+                    continue;
 
                 vout = vops.performCheck("Enter the ISO code of your country? ",
                         "Invalid ISO code. Enter again or * to go back",
@@ -112,9 +114,9 @@ public class LandingView {
 
             else if (s.equals("2")) {
                 String email = pDisplay.getText("Enter email or * to go back");
-                if(email==null) break;
+                if(email==null || LandingView.removingScreens) continue;
                 String password = pDisplay.getPassword("Enter password");
-                if(password==null) break; 
+                if(password==null || LandingView.removingScreens) continue; 
                 System.out.println("Log in in progress");
                 User user = authenticationController.login(email, password);
                 if (user == null) {

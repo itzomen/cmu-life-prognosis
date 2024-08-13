@@ -2,6 +2,7 @@ package views.util.validviewutil;
 
 import models.intermediate.ValidationOutput;
 import views.util.displayutil.PromptDisplay;
+import views.util.landingview.LandingView;
 
 import java.time.LocalDate;
 
@@ -12,7 +13,7 @@ public class ValidConcreteOperation {
         String input = "";
         while (!validToken) {
             input = isPassword ? pDisplay.getPassword(pMessage) : pDisplay.getText(pMessage);
-            if (input == null)
+            if (input == null || LandingView.removingScreens)
                 break;
             validToken = operation.check(input);
             if (!validToken)
@@ -31,7 +32,7 @@ public class ValidConcreteOperation {
         LocalDate dobj = null;
         while (dobj == null) {
             input = pDisplay.getText(pMessage);
-            if (input == null)
+            if (input == null || LandingView.removingScreens)
                 break;
             dobj = operation.dateCheck(input);
             if (dobj == null || !dobj.isBefore(LocalDate.now())) {
@@ -49,7 +50,7 @@ public class ValidConcreteOperation {
         LocalDate dobj = null;
         while (dobj == null) {
             input = pDisplay.getText(pMessage);
-            if (input == null)
+            if (input == null || LandingView.removingScreens)
                 break;
             dobj = operation.dateCheck(input, initDate);
             if (dobj == null || !dobj.isBefore(LocalDate.now())) {
@@ -66,7 +67,7 @@ public class ValidConcreteOperation {
         LocalDate dobj = null;
         while (dobj == null) {
             input = pDisplay.getText(pMessage);
-            if (input == null)
+            if (input == null || LandingView.removingScreens)
                 break;
             dobj = operation.dateCheck(input);
             if (dobj == null || !dobj.isBefore(LocalDate.now()) || dobj.isBefore(befDate)) {
@@ -83,9 +84,11 @@ public class ValidConcreteOperation {
         LocalDate dobj = null;
         while (dobj == null) {
             input = pDisplay.getText(pMessage);
-            if (input == null)
+            if (input == null || LandingView.removingScreens)
                 break;
+            
             dobj = operation.dateCheck(input, initDate);
+         
             if (dobj == null || !dobj.isBefore(LocalDate.now()) || dobj.isBefore(befDate)) {
                 dobj = null;
                 System.out.println(message);
@@ -96,12 +99,12 @@ public class ValidConcreteOperation {
 
     public boolean checkPassConfirmation(String password, PromptDisplay pDisplay) {
         String cpass = pDisplay.getPassword("Confirm password");
-        while (!cpass.equals(password)) {
-            cpass = pDisplay.getPassword("Passwords don't match. Enter again or * to go back, ^ to exit");
-            if (cpass == null)
+        while (cpass!=null && !LandingView.removingScreens && !cpass.equals(password)) {
+            cpass = pDisplay.getPassword("Passwords don't match. Enter again or * to go back, $ to exit");
+            if (cpass == null || LandingView.removingScreens)
                 return false;
         }
-        return true;
+        return cpass!=null && !LandingView.removingScreens;
     }
 
     public String checkPasswordValidity(String email, PromptDisplay pDisplay,
@@ -110,7 +113,7 @@ public class ValidConcreteOperation {
         boolean valid = false;
         while (!valid) {
             pass = pDisplay.getPassword("Enter previous password");
-            if (pass == null)
+            if (pass == null || LandingView.removingScreens)
                 break;
             valid = operation.passwordCheck(email, pass) != null;
             if (!valid)

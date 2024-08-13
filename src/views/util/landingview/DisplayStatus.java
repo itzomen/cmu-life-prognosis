@@ -21,7 +21,9 @@ public class DisplayStatus {
     this.patient=patient;
   }
 
-  public HivStatus getStatusInfo(LocalDate dob) {
+  public HivStatus getStatusInfo(LocalDate dob, boolean isRegistering) {
+
+    // if isRegister is false patient is null
     String st;
     LocalDate diagDate = null;
     LocalDate artDate = null;
@@ -30,11 +32,20 @@ public class DisplayStatus {
     boolean hivStatus = false;
     boolean valid=false;
     while (!stCheck) {
+      if(LandingView.removingScreens) break;
       st = pDisplay.getText(" HIV status \n 1. tested positive \n 2.tested negative");
-      if (st == null){
+
+      // check for edge cases 
+      if (st == null ){
          break; 
       }
-      else if (st.equals("1") || st.equals("2")) {
+      else if(st.isEmpty() && !isRegistering){
+          hivStatus= patient.isHIVStatus();
+          st=hivStatus ? "1": "2";
+      }
+
+      // check for normal conditions in another branching 
+      if (st.equals("1") || st.equals("2")) {
         if (st.equals("1")) {
           hivStatus = true;
           String pMessage= "when is your diagnosis date mm/dd/yyyy";
@@ -50,9 +61,14 @@ public class DisplayStatus {
             continue;
 
           String art = pDisplay.getText("Are you currently on ART? 1. yes 2.No");
-          if (art == null) {
+          if (art == null || LandingView.removingScreens) {
             break;
-          } else if (art.equals("1") || art.equals("2")) {
+          }
+          else if(art.isEmpty()){
+            art= patient.isTakingART() ? "1" : "2";
+          }  
+          
+          if (art.equals("1") || art.equals("2")) {
             if (art.equals("1")) {
               takingART = true;
               pMessage="Enter date of start for the treatment";

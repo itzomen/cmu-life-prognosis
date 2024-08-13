@@ -6,7 +6,7 @@ public class Messages{
     "   Password should be at least a length of 8, contain upper and lowercase letters \n"+
     "   UUID and email should be in a valid format \n" +
             "   Use * to go back to previous options \n" +
-            "use ^ to exit the program \n" +
+            "use $ to exit the program \n" +
     "   Use exit options to stop the program \n" +
     "   Date format is MM/dd/yyyy \n" +
     "   "

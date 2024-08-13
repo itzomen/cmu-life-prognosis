@@ -2,6 +2,8 @@ package views.util.displayutil;
 
 import java.io.Console;
 import java.util.Scanner;
+
+import views.util.landingview.LandingView;
 // this class is used to handle the interaction with the user input
 public class PromptDisplay {
 Scanner scanner;
@@ -19,6 +21,10 @@ public String getText(String message){
     if(input.equals("*")){
        return null; 
     }
+    else if(input.equals("^")){
+        LandingView.removingScreens=true;
+
+    }
     return input;     
 }
 
@@ -28,11 +34,14 @@ public String getPassword(String message){
     String input= new String(passArray);
     exitProgramCheck(input);
     if(input.equals("*")) return null; 
+    if(input.equals("^")) {
+        LandingView.removingScreens=true;
+    }
     return new String(passArray);
 }
 
 public void exitProgramCheck(String text){
-    if(text.equals("^")){
+    if(text.equals("$")){
         System.exit(0);
     }
 }

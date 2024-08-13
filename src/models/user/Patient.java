@@ -62,11 +62,5 @@ public class Patient extends User{
 
     private String ISOCode;
 
-    public String toString() {
-        String shared= super.toString();
-        return shared + "dob: "+ dob.format(CustomFormatter.formatter) + 
-        "hivStatus"+ this.HIVStatus+ "diagnosis date: "+ 
-        diagnsisDate.format(CustomFormatter.formatter) + "ART: "+ String.valueOf(takingART) + 
-        artDate.format(CustomFormatter.formatter) + ISOCode ;
-    }
+    
 }
