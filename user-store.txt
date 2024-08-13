@@ -13,3 +13,5 @@ b642f83d-3d6a-4e75-b384-a480712ef88a:addis@email.com:patient:19513fdc9da4fb72a4a
 37f1bc08-9839-43ff-b70c-f55d6483fcdb:soontodie@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:secondFname:newLname:07/16/2022:ET:true:07/16/2023:true:07/16/2024
 c82a2555-7b56-44aa-bace-0389ff6ea6fe:healthy@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:healthy:guy:07/26/1998:ET:false::false:
 6af2953b-80e8-44b1-88b8-007a3cdc9e17:lateuser@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:soon:to:07/16/2016:RW:true:07/16/2016:false:
+04f979ac-4212-4f6a-8dbe-731c9a579e6b:rwandauser@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:Rwanda:user:07/16/2016:RW:false::false:
+09b0c6c9-8d1f-4548-bb3b-a5ad18254702:younguser@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:young:user:08/12/2024:JP:false::false:

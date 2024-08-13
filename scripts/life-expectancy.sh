@@ -29,6 +29,7 @@ compute_remaining_lifespan() {
                 delay_years=$(($art_year - $diagnosis_year))
             fi
             if [ -n "$life_expectancy" ]; then
+                #using the mathematical model defined in the documentation
                 local reduced_life=$(echo "($life_expectancy - $age) * 0.9 * (0.9^$delay_years)" | bc)
                 local rounded_life=$(echo "($reduced_life + 0.999999)/1" | bc)
                 echo $rounded_life
@@ -36,8 +37,9 @@ compute_remaining_lifespan() {
                 echo "Life expectancy not found for ISO: $country_iso"
             fi
         else
-            
+            # hiv diagnosed individuals only have 5 years if no on ART
             local reduced_life=$(echo "($diagnosis_year + 5 - $current)" |bc)
+            # rounding to the next integer
             local rounded_life=$(echo "($reduced_life + 0.999999)/1" | bc)
             if (("$rounded_life" >= "0")); then
                 echo $rounded_life
@@ -47,7 +49,9 @@ compute_remaining_lifespan() {
             fi
         fi
     else
+        # normal course of life
         local reduced_life=$(echo "($life_expectancy - $age)" |bc)
+        # rounding the value to the next largest integer below
         local rounded_life=$(echo "($reduced_life + 0.999999)/1" | bc)
         echo $rounded_life
         
