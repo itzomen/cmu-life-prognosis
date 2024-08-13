@@ -24,6 +24,7 @@ replay_pid*
 
 scripts/*.ics
 scripts/*.csv
+scripts/*.pdf
 scripts/user-store.txt
 
 

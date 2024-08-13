@@ -6,7 +6,7 @@
 OUTPUT_FILE="patients.csv"
 
 # Write the CSV header
-echo "UUID,Email,Role,Password,First Name,Last Name,Date of Birth,Country,HIV Status,Diagnosis Date,ART Status,ART Date" > $OUTPUT_FILE
+echo "UUID,Email,Role,First Name,Last Name,Date of Birth,Country,HIV Status,Diagnosis Date,ART Status,ART Date" > $OUTPUT_FILE
 
 # Read from user-store.txt and write patient details to the CSV file
 while IFS=: read -r uuid email role password fn ln dob country hiv diagnosis_date art art_date; do
