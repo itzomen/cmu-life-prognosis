@@ -1,5 +1,5 @@
 640a19ac-df76-4a58-b57b-0785d6a313b5:admin@email.com:admin:5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8:Admin:Doe:07/16/2000:RW:true:07/16/2020:true:07/16/2021
-bef8e462-0e5e-4abd-8316-3cea7895a704:patient@email.com:patient:9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f:Uno:Patient:07/16/2010:RW:true:07/16/2020:true:07/16/2021
+bef8e462-0e5e-4abd-8316-3cea7895a704:patient@email.com:patient:9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f:Uno:Patient:07/16/2010:ET:false::false:
 a211a8fb-fd3c-4e16-b8cd-857cd7ac9433:john.doe@email.com:patient:9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f:John:Doe:04/01/2004:AL:true:04/01/2010:true:11/20/2022
 3bd54548-b7fb-4ea1-8566-c2690b30a788:jane.smith@email.com:patient:9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f:Jane:Smith:04/01/1990:AL:true:04/01/2001:false:11/20/2022
 4f0fb394-9820-4cef-86e6-8c5cdb0b1695:alex.jones@email.com:patient:9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f:Alex:Jones:04/01/1999:AL:true:04/01/2024:true:11/20/2022
@@ -15,3 +15,5 @@ c82a2555-7b56-44aa-bace-0389ff6ea6fe:healthy@email.com:patient:19513fdc9da4fb72a
 6af2953b-80e8-44b1-88b8-007a3cdc9e17:lateuser@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:soon:to:07/16/2016:RW:true:07/16/2016:false:
 04f979ac-4212-4f6a-8dbe-731c9a579e6b:rwandauser@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:Rwanda:user:07/16/2016:RW:false::false:
 09b0c6c9-8d1f-4548-bb3b-a5ad18254702:younguser@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:young:user:08/12/2024:JP:false::false:
+618402b5-704d-48f8-aa71-2ca5440b97ff:newestPatient@email.com:patient:::::::::
+3ffcfe18-7065-4ed6-99d7-885baa2d4b24:newestuser@email.com:patient:19513fdc9da4fb72a4a05eb66917548d3c90ff94d5419e1f2363eea89dfee1dd:newest:user:07/16/2017:RW:true:07/16/2017:true:07/16/2023
