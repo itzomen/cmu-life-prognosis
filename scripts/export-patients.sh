@@ -32,6 +32,7 @@ done < user-store.txt
 if command -v pandoc &> /dev/null
 then
   pandoc -o $PDF_FILE temp.csv --metadata-file=metadata.yaml
+  rm temp.csv
   echo "Exported patient data to $PDF_FILE"
 else
   echo "Pandoc is not installed. Please install pandoc to convert the csv to pdf"
