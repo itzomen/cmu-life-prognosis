@@ -33,7 +33,7 @@ public class AdminView extends UserView {
                 if(op==null || LandingView.removingScreens) break;
     
                 else if (op.equals("1")) {
-                vout = vops.performCheck("Enter email","Invalid email. Enter again or * to go back",
+                vout = vops.performCheck("Enter email: ","Invalid email",
                         adminController::emailValid, false, pDisplay
                 );
                 if (!vout.isValid()) continue;

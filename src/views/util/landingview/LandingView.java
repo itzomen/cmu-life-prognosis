@@ -37,8 +37,7 @@ public class LandingView {
         while (true) {
 
             // code refactored for better collaboration
-            
-            String s = pDisplay.getText(" 1. Register \n 2. Login \n 3. Help \n 4. Exit \n ");
+            String s = pDisplay.getText("1. Register \n2. Login \n3. Help \n4. Exit \n");
             if(LandingView.removingScreens) LandingView.removingScreens=false;
             if(s==null ) break;
             else if (s.equals("1")) {
@@ -46,30 +45,30 @@ public class LandingView {
                 String uuid, fName, lName, isoCode, password;
                 boolean hivStatus, takingART;
 
-                vout = vops.performCheck("Enter UUID provided by admin or  * to back",
-                        "Invalid UUID. Enter again or * to go back",
+                vout = vops.performCheck("Enter UUID provided by admin: ",
+                        "Invalid UUID. Enter again",
                         authenticationController::uuidValid, false, pDisplay);
                 if (!vout.isValid())
                     continue;
                 uuid = vout.getInput();
 
-                vout = vops.performCheck("Enter First Name or *",
-                        "Invalid Name: name shouldn't contain a number. Enter again or * to go back",
+                vout = vops.performCheck("Enter First Name: ",
+                        "Invalid Name: name shouldn't contain a number.",
                         authenticationController::fNameValid, false, pDisplay);
                 if (!vout.isValid())
                     continue;
                 fName = vout.getInput();
 
                 vout = vops.performCheck(
-                        "Enter Last Name",
-                        "Invalid last Name: name shouldn't contain a number. Enter again or * to go back",
+                        "Enter Last Name: ",
+                        "Invalid last Name: name shouldn't contain a number",
                         authenticationController::fNameValid, false, pDisplay);
                 if (!vout.isValid())
                     continue;
                 lName = vout.getInput();
 
                 LocalDate dobj = null;
-                dobj = vops.performDateCheck("Enter DOB mm/dd/yyyy", "Invalid DOB. Enter again or * to go back",
+                dobj = vops.performDateCheck("Enter DOB mm/dd/yyyy: ", "Invalid DOB",
                         authenticationController::dateValid, pDisplay);
                 if (dobj == null) 
                     continue;
@@ -82,16 +81,16 @@ public class LandingView {
                 if (!hstat.isValid())
                     continue;
 
-                vout = vops.performCheck("Enter the ISO code of your country? ",
-                        "Invalid ISO code. Enter again or * to go back",
+                vout = vops.performCheck("Enter the ISO code of your country: ",
+                        "Invalid ISO code",
                         authenticationController::isoValid, false, pDisplay);
                 if (!vout.isValid())
                     continue;
                 isoCode = vout.getInput();
 
                 vout = vops.performCheck(
-                        "Enter password ",
-                        "Invalid password(length: 8, numbers, uppercase and lowercase letters). Enter again or * to go back",
+                        "Enter password: ",
+                        "Invalid password(length: 8, numbers, uppercase and lowercase letters)",
                         authenticationController::passwordValid, true, pDisplay);
                 if (!vout.isValid())
                     continue;
@@ -113,9 +112,9 @@ public class LandingView {
             }
 
             else if (s.equals("2")) {
-                String email = pDisplay.getText("Enter email or * to go back");
+                String email = pDisplay.getText("Enter email: ");
                 if(email==null || LandingView.removingScreens) continue;
-                String password = pDisplay.getPassword("Enter password");
+                String password = pDisplay.getPassword("Enter password: ");
                 if(password==null || LandingView.removingScreens) continue; 
                 System.out.println("Log in in progress");
                 User user = authenticationController.login(email, password);

@@ -33,7 +33,7 @@ public class DisplayStatus {
     boolean valid=false;
     while (!stCheck) {
       if(LandingView.removingScreens) break;
-      st = pDisplay.getText(" HIV status \n 1. tested positive \n 2.tested negative");
+      st = pDisplay.getText(" HIV status \n 1. tested positive \n 2.tested negative \n");
 
       // check for edge cases 
       if (st == null ){
@@ -48,8 +48,8 @@ public class DisplayStatus {
       if (st.equals("1") || st.equals("2")) {
         if (st.equals("1")) {
           hivStatus = true;
-          String pMessage= "when is your diagnosis date mm/dd/yyyy";
-          String errMessage="Invalid date. Enter again or * to go back";
+          String pMessage= "when is your diagnosis date mm/dd/yyyy: ";
+          String errMessage="Invalid date";
           diagDate = patient!=null?  
           vops.performDateRangeWithEmpty(pMessage,
               errMessage,
@@ -60,7 +60,7 @@ public class DisplayStatus {
           if (diagDate == null)
             continue;
 
-          String art = pDisplay.getText("Are you currently on ART? 1. yes 2.No");
+          String art = pDisplay.getText("Are you currently on ART?\n 1. Yes \n 2.No \n");
           if (art == null || LandingView.removingScreens) {
             break;
           }
@@ -71,7 +71,7 @@ public class DisplayStatus {
           if (art.equals("1") || art.equals("2")) {
             if (art.equals("1")) {
               takingART = true;
-              pMessage="Enter date of start for the treatment";
+              pMessage="Enter date of start for the treatment: ";
 
               artDate = patient!=null? 
               vops.performDateRangeWithEmpty(pMessage,
@@ -83,14 +83,14 @@ public class DisplayStatus {
                 continue;
             }
           } else {
-            System.out.println("Invalid option try again or * to go back");
+            System.out.println("Invalid option. try again");
             continue;
           }
         }
         stCheck=true;
         valid=true;
       } else {
-        System.out.println("Invalid option try again or * to go back");
+        System.out.println("Invalid option.try again");
       }
     }
     return new HivStatus(hivStatus, diagDate, takingART, artDate,valid);

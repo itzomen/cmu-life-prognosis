@@ -15,7 +15,8 @@ public PromptDisplay(Scanner scanner, Console console){
 }
 
 public String getText(String message){
-    System.out.println(message); 
+    System.out.println("——————————————————————————————————————————————————————————————————————————— * back ^ firstscreen(logout) $ exit");
+    System.out.print(message); 
     String input= scanner.nextLine();
     exitProgramCheck(input);
     if(input.equals("*")){
@@ -29,7 +30,8 @@ public String getText(String message){
 }
 
 public String getPassword(String message){
-    System.out.println(message); 
+    System.out.println("——————————————————————————————————————————————————————————————————————————— * back ^ logout $ exit");
+    System.out.print(message); 
     char[] passArray = console.readPassword();
     String input= new String(passArray);
     exitProgramCheck(input);

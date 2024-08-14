@@ -98,9 +98,9 @@ public class ValidConcreteOperation {
     }
 
     public boolean checkPassConfirmation(String password, PromptDisplay pDisplay) {
-        String cpass = pDisplay.getPassword("Confirm password");
+        String cpass = pDisplay.getPassword("Confirm password: ");
         while (cpass!=null && !LandingView.removingScreens && !cpass.equals(password)) {
-            cpass = pDisplay.getPassword("Passwords don't match. Enter again or * to go back, $ to exit");
+            cpass = pDisplay.getPassword("Passwords don't match. Enter again");
             if (cpass == null || LandingView.removingScreens)
                 return false;
         }
