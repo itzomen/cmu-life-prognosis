@@ -20,7 +20,7 @@ done < user-store.txt
 echo "Exported patient data to $OUTPUT_FILE"
 
 # create a temporary csv that for pdf export
-echo "Email,First Name,Last Name,Date of Birth,ISO,HIV Status,Diagnosis Date,ART,ART Date" > temp.csv
+echo "Email,First Name,Last Name,Date of Birth,ISO,HIV,Diagnosis Date,ART,ART Date" > temp.csv
 while IFS=: read -r uuid email role password fn ln dob country hiv diagnosis_date art art_date; do
   # Only include patients in the CSV file
   if [ "$role" == "patient" ]; then
