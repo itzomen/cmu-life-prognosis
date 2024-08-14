@@ -3,7 +3,6 @@ package models.user;
 import java.time.LocalDate;
 
 import constants.Role;
-import views.util.formatter.CustomFormatter;
 
 public class Patient extends User{
     private LocalDate dob;

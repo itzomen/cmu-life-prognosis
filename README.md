@@ -46,3 +46,5 @@ The fields are as follows:
 - check for * entry in the password confirmation field
 - login and back feature completion
 - MAKE SURE TO INSTALL BC IN WSL------->
+- rounding precision in mean, median and percentiles
+- duplicate email registration handled???
