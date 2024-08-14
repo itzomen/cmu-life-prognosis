@@ -7,7 +7,7 @@ import faker
 NUM_USERS = 500
 PASSWORD_HASH = "9e8116dd15110c6da7f26e290c736c60577e61c99d327134ab53c7e71bec0c9f"
 ROLES = ['admin', 'patient']
-COUNTRIES = ['US', 'RW', 'ET', 'AL', 'CMU', 'JP']
+COUNTRIES = ['US', 'RW', 'ET', 'AL', 'CM', 'JP', 'ZA', 'GH', 'KE', 'NG', 'TZ', 'UG', 'CD', 'EG', 'MA', 'SD', 'TN', 'ZM', 'ZW', 'AO', 'BJ', 'BW', 'BF', 'BI', 'CV', 'CF', 'TD', 'KM', 'CI', 'DJ', 'GQ', 'ER', 'SZ', 'ET', 'GA', 'GM', 'GN', 'GW', 'LS', 'LR', 'LY', 'MG', 'MW', 'ML', 'MR', 'MU', 'YT', 'MA', 'MZ', 'NA', 'NE', 'RE', 'RW', 'ST', 'SN', 'SC', 'SL', 'SO', 'ZA', 'SS', 'SH', 'SD', 'SZ', 'TZ', 'TG', 'TN', 'UG', 'CD', 'ZM', 'ZW']
 FAKER = faker.Faker()
 
 def generate_user_data():
