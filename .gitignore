@@ -1,3 +1,6 @@
+# env files
+env
+
 # Compiled class file
 *.class
 
@@ -24,6 +27,8 @@ replay_pid*
 
 scripts/*.ics
 scripts/*.csv
+scripts/*.pdf
 scripts/user-store.txt
+scripts/generated_users.txt
 
 

@@ -1,4 +1,3 @@
-
 package controllers.usercontroller;
 
 import dataprovider.userprovider.AdminProvider;

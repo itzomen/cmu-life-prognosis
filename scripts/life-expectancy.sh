@@ -69,4 +69,3 @@ do
     fi
 
 done < "user-store.txt"
-
