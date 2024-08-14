@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import javax.management.RuntimeErrorException;
+
 import models.user.Patient;
 import views.util.formatter.CustomFormatter;
 
 public class PatientProvider {
 
   public int getLifeSpan(String email) throws IOException {
-    System.out.println("email: "+ email);
     // Prepare the ProcessBuilder with the necessary arguments
     ProcessBuilder pb = new ProcessBuilder("scripts/life-expectancy.sh", email);
 
@@ -56,11 +57,8 @@ public class PatientProvider {
 
   }
 
-  public void updatePassword(String email, String newPassword) {
-    // update password by hashing the newPassword
-    // for the email given
-    // throw if any error
-    throw new RuntimeException("test exception");
+  public String getDemiseSchedule(String email){
+    return "";
   }
 
 }

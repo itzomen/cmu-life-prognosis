@@ -20,12 +20,12 @@ public class PatientController implements ValidationInterface {
     try {
       return patientProvider.getLifeSpan(email);
     } catch (IOException e) {
-      e.printStackTrace();
       return null;
     }
   }
 
   
+
   public boolean updateProfile(Patient initPatient,UpdateData udata){
       try{
         patientProvider.updateProfile(new Patient(udata.getfName(), udata.getlName(), initPatient.getEmail(), udata.getDob(),
@@ -38,13 +38,13 @@ public class PatientController implements ValidationInterface {
       }
   }
 
-  public boolean updatePassword(String email, String password){
-     try {
-       patientProvider.updatePassword(email, password);
-       return true;
-     } catch (Exception e) {
-       return false; 
-     }
+  public String getDemiseSchedule(String email){
+    try {
+      return patientProvider.getDemiseSchedule(email);
+       
+    } catch (Exception e) {
+      return null; 
+    }
   }
 
 }
