@@ -1,38 +1,65 @@
-
 package models.user;
+
+import java.time.LocalDate;
 
 import constants.Role;
 
-import static constants.Role.PATIENT;
-
-abstract public class User{
-    protected String fName;
-    protected String lName;
-    protected String email;
-
-    public String getfName() {
-        return fName;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
+public class Patient extends User{
+    private LocalDate dob;
+    private boolean HIVStatus;
+    private LocalDate diagnsisDate;
+    private LocalDate artDate;
     
-    protected String password;
-    protected Role role= PATIENT;  // setting default value to patient
-
-    public Role getRole() {
-        return role;
+    public Patient(String fName, String lName, String email,LocalDate dob, boolean hIVStatus, 
+    LocalDate diagnsisDate, boolean takingART, LocalDate artDate,  String iSOCode, Role role) {
+        this.fName=fName;
+        this.lName=lName;
+        this.email=email;
+        this.dob = dob;
+        HIVStatus = hIVStatus;
+        this.diagnsisDate = diagnsisDate;
+        this.takingART = takingART;
+        this.artDate=artDate;
+        ISOCode = iSOCode;
     }
 
-    public String toString() {
-        return "Fname: "+ fName + "Lname: "+ lName + "email: "+ email;
+    private boolean takingART;
+
+    public LocalDate getDiagnsisDate() {
+        return diagnsisDate;
+    }
+
+    
+
+    public LocalDate getArtDate() {
+        return artDate;
     }
 
 
 
+    public void setArtDate(LocalDate artDate) {
+        this.artDate = artDate;
+    }
+
+
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public boolean isHIVStatus() {
+        return HIVStatus;
+    }
+
+    public boolean isTakingART() {
+        return takingART;
+    }
+
+    public String getISOCode() {
+        return ISOCode;
+    }
+
+    private String ISOCode;
+
+    
 }

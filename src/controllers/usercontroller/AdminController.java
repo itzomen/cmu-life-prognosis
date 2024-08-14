@@ -1,4 +1,3 @@
-
 package controllers.usercontroller;
 
 import dataprovider.userprovider.AdminProvider;
@@ -34,11 +33,12 @@ public class AdminController implements ValidationInterface {
         }
     }
 
-    public String exportAnalytics() {
+    public boolean exportAnalytics() {
        try {
-        return adminProvider.exportAnalytics();
+        adminProvider.exportAnalytics();
+        return true;
        } catch (Exception e) {
-         return null;    
+         return false;
     }
     }
 
