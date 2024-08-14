@@ -32,7 +32,8 @@ public class PatientView extends UserView {
         outerloop: while (true) {
             if (LandingView.removingScreens)
                 break;
-            System.out.println("Hello " + user.getfName() + "\n");
+            
+            System.out.println("\n Hello " + user.getfName() + "\n");
             String op = pDisplay.getText(
 
                     "1. View profile info \n2. Update profile \n3. Get demise schedule \n4. Exit \n");
@@ -42,28 +43,27 @@ public class PatientView extends UserView {
             switch (op) {
                 case "1" -> {
                     Patient p = (Patient) user;
-                    String hivMess = p.isHIVStatus() ? "p" : "n";
-                    String diagDate="-";
-                    String takingART="-";
-                    String artDate="-";
                     
+                   
+                                        System.out
+                            .println("\nFirst name: " + p.getfName() );
+
+                    System.out.println("Last name: " + p.getlName());
+                    String hivMess = p.isHIVStatus() ? "positive" : "negative";
+                    System.out.println("Email: " + p.getEmail()  );
+                    System.out.println("HIV status: " + hivMess);
+                     System.out.println("Date of birth: " + p.getDob().format(CustomFormatter.formatter));
+                    System.out.println("Iso code: " + p.getISOCode());
                     if (p.isHIVStatus()) {
-                         diagDate = p.getDiagnsisDate().format(CustomFormatter.formatter);
-                         takingART= p.isTakingART() ? "yes": "no";
+                        String diagDate = p.getDiagnsisDate().format(CustomFormatter.formatter);
+                        System.out.println(
+                                "Diagnosis date: " + diagDate  );
+                        System.out.println("ART: " + (p.isTakingART() ? "Yes" : "No"));
                         if (p.isTakingART())
-                            artDate=p.getArtDate().format(CustomFormatter.formatter);
+                            System.out
 
-                    }
-                    System.out.format("+---------+---------+---------+-------+---------+---------+---------+-------+-------+-------+---------+-------+-------+------------%n");
-                    System.out.format(
-                            "| FName    | LName       |  email                  |  DOB            |  ISOcode | status   | diagDate         |  takingART | ARTdate           |%n");
-                    System.out.format("+---------+---------+---------+-------+---------+---------+---------+-------+-------+-------+---------+-------+-------+------------%n");
-
-                    String leftAlignment = "| %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s |%n";
-
-                    System.out.format(leftAlignment,p.getfName(),  p.getlName(),
-                    p.getEmail(), p.getDob().format(CustomFormatter.formatter),p.getISOCode(),hivMess,diagDate,takingART,artDate );
-                    System.out.format("+---------+---------+---------+-------+---------+---------+---------+-------+-------+-------+---------+-------+-------+------------%n");
+                                    .println("ART start date: " + p.getArtDate().format(CustomFormatter.formatter));
+                       
 
                     Integer lSpan = patientController.getLifeSpan(p.getEmail());
                     if (lSpan != null) {
@@ -71,7 +71,7 @@ public class PatientView extends UserView {
                     } else {
                         System.out.println("Error in fetching health information");
                     }
-                }
+                }}
                 case "2" -> {
                     Patient p = (Patient) user;
                     System.out.println("Update profile information or leave empty for the default values");

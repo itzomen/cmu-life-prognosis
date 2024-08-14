@@ -22,7 +22,7 @@ public class AdminView extends UserView {
         PromptDisplay pDisplay= new PromptDisplay(new Scanner(System.in), System.console());
         while (true) {
             if(LandingView.removingScreens) break;
-            System.out.println("Hello "+ user.getfName());
+            System.out.println("\nHello "+ user.getfName());
             String op = pDisplay.getText("""
                      1. Initiate a registration\s
                      2. Export user files \s
