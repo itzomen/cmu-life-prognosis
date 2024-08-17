@@ -34,17 +34,3 @@ The fields are as follows:
 - `art_status`: The ART status of the user. (true or false)
 - `art_date`: The date the patient started ART drugs.
 
-
-## TODOz
-
-- Create assignment checklist.
-- Add Iso code to user and update export to include it.
-- Add descriptions of all the files in user-store.txt or files used as data store.
-- No passing the password through the provider, do authentication immediately.
-- Change date format for saving to the data store.
-- Modularize the register feature to be used on the Update profile feature 
-- check for * entry in the password confirmation field
-- login and back feature completion
-- MAKE SURE TO INSTALL BC IN WSL------->
-- rounding precision in mean, median and percentiles
-- duplicate email registration handled???
